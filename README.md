@@ -17,6 +17,7 @@ Launches kobuki and its sensor
 	roslaunch kobuki_multi_robot kobuki.launch robot_name sensor
 
 robot_name : {'kobuki_a', 'kobuki_b', 'kobuki_c', 'kobuki_d', 'kobuki_e'}
+
 sensor : {'realsense', 'hokuyo04lx', 'hokuyo20lx', 'rplidar'}
 
 Launch kobuki navigation (on kobuki)
@@ -26,7 +27,9 @@ Launches navigation stack and goal slave SAP (subscribed to goal master publishe
 	roslaunch kobuki_multi_robot kobuki_navigation.launch robot_name kobuki_id init_pose_x init_pose_y
 	
 robot_name : {'kobuki_a', 'kobuki_b', 'kobuki_c', 'kobuki_d', 'kobuki_e'}
+
 kobuki_id : {1, 2, 3, 4, 5}
+
 init_pose_x and init_pose_y : initial coordinates in map_frame
 
 Launch test (on base station)
