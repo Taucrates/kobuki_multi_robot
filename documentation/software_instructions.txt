@@ -1,0 +1,78 @@
+Author: Esau Ortiz Toribio (esau.ortiz@uib.es)
+File: software_instructions.txt
+Descripcion: Instrucciones de instalación de software del conjutno de kobukis
+Fecha: marzo 2021
+
+Instrucciones a seguir una vez se tiene instalado ROS Melodic / 18.04 LTS Ubuntu:
+
+    1) Descargar el repositorio de kobuki de https://github.com/yujinrobot/kobuki dentro del workspace de ROS
+    2) Entrar en el repositorio que se acaba de bajar y pasarlo a la rama "melodic": git checkout melodic
+    3) Descargar los siguientes paquetes dentro del workspace:
+
+        sudo apt-get install ros_melodic_kobuki_core
+        sudo apt-get install ros_melodic_kobuki_msgs
+        sudo apt-get install ros_melodic_yocs_controllers
+        sudo apt-get install ros_melodic_ecl_streams
+
+    4) Compilar todos los paquestes descargados ejecutando catkin_make dentro del workspace
+
+    ------------En este punto ya funcionaría con el robot real------------
+
+    5) Descargar el repositorio "kobuki_dsktop" de https://github.com/yujinrobot/kobuki_desktop
+    6) Ejecutar el comando: sudo apt-get install pyqt5-dev-tools
+    7) Compilar de nuevo: catkin_make
+
+    ------------En este punto debería funcionar también con el simulador Gazebo------------
+
+    NOTAS ADICIONALES (por si son útiles):
+
+    8) En el .bashrc conviene añadir las líneas:
+    source path_al_workspace/devel/setup.bash
+    export ROS_MASTER_URI=http://127.0.0.1:11311
+    export ROS_IP=127.0.0.1
+
+Instrucciones adicionales
+
+	1) Activar conexión ssh https://linuxize.com/post/how-to-enable-ssh-on-ubuntu-18-04/
+	2)	sudo apt-get install ros-melodic-teb-local-planner (finalmente se ha optado por DWA y no hace falta instalar este package)
+	3)	sudo apt-get install ros-melodic-amcl
+	4)	sudo apt-get install ros-melodic-yocs-velocity-smoother
+
+	5) Instalar htop
+
+	6) Adicionalmente se proveen de librerias de real-sense
+		https://github.com/IntelRealSense/realsense-ros
+	7) Copiar .rules en /etc/udev/rules.d/ si ROS no detecta la camara por USB
+		https://github.com/IntelRealSense/librealsense/blob/master/config/99-realsense-libusb.rules
+
+	8) Gmapping
+		sudo apt-get install ros-melodic-gmapping
+	9) Navagation stack
+		sudo apt-get install ros-melodic-navigation
+	10) Depth-to-scan 
+		sudo apt-get install ros-melodic-depthimage-to-laserscan
+		rosrun depthimage_to_laserscan depthimage_to_laserscan image:=/camera/depth/image_rect_raw camera_info:/camera/depth/camera_info
+
+- Para el hokuyo 04LX
+	+ sudo adduser <YOUR_USERNAME> dialout
+	+ od /dev/ttyACM0
+	+ sudo apt install ros-melodic-urg-node
+	+ rosrun urg_node urg_node
+
+- Para el hokuyo 20LX
+	+ La dirección por defecto del hokuyo es 192.168.0.10
+	+ Configurar puerto ethernet como 192.168.0.20/25
+	+ rosrun urg_node urg_node _ip_address:=192.168.0.10
+
+- Para el RPLIDAR
+	+ Descargar repositorio https//github.com/Slamtec/rplidar_ros
+	+ sudo adduser <YOUR_USERNAME> dialout
+	+ sudo chmod 666 /dev/ttyUSB0
+	+ comprobar ls -al /dev/ttyUSB0
+	+ launch rplidar_s1.launch
+
+- En BIOS
+	11) Opcion Advanced - Boot - Boot configuration - Suppress Alert Messages At Boot >> Desactivada
+
+- Despues de configurar IP estatica ver
+	12) ssh-keyscan -H 192.168.1.162 >> ~/.ssh/known_hosts
