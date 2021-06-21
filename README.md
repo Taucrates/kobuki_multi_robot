@@ -34,7 +34,7 @@ init_pose_x and init_pose_y : initial coordinates in map_frame
 
 Launch test (on base station)
 ------------------------------------------------------------
-Launches kobuki description, rviz and goal master publisher. Goal master publications are triggered by rostopic pub /update_global_goals std_msgs/Int8 "data: 1" (see globalgoals.txt file)
+Launches kobuki description, rviz and goal master publisher. Goal master publications are triggered by rostopic pub /update_global_goals std_msgs/Int8 "data: 1" (see README file in src folder)
 
 	roslaunch kobuki_multi_robot test.launch map_name
 
