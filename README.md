@@ -18,7 +18,7 @@ Launches kobuki and its sensor
 
 robot_name : {kobuki_a, kobuki_b, kobuki_c, kobuki_d, kobuki_e}
 
-sensor : {realsense, hokuyo04lx, hokuyo20lx, rplidar}
+sensor : {realsense, hokuyo04LX, hokuyo20LX, rplidar}
 
 Launch kobuki navigation (on kobuki)
 ------------------------------------------------------------
