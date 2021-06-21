@@ -1,4 +1,4 @@
-Master and slave nodes
+Master and slave nodes to publish goals
 =====================================================================
 The master node reads a list of global goals. Each global goal is composed of an identifier (id) and a stamped pose (pose_stamped). The slave node is subscribed to the global goals topic and checks if any global goal have the identifier of the kobuki where the slave node is running. If a global goal is associated with the kobuki identifier this global target is published in the kobuki global target topic /kobuki_id/move_base_simple/goal.
 
