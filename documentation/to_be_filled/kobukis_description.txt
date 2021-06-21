@@ -1,0 +1,4 @@
+Author: Esau Ortiz Toribio (esau.ortiz@uib.es)
+File: kobukis_description.txt
+Descripcion: Descripción de los kobukis (nombres y sensores)
+Fecha: junio 2021

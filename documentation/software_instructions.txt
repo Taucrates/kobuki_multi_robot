@@ -1,6 +1,6 @@
 Author: Esau Ortiz Toribio (esau.ortiz@uib.es)
 File: software_instructions.txt
-Descripcion: Instrucciones de instalación de software del conjutno de kobukis
+Descripcion: Instrucciones de instalación de software del conjunto de kobukis
 Fecha: marzo 2021
 
 Instrucciones a seguir una vez se tiene instalado ROS Melodic / 18.04 LTS Ubuntu:

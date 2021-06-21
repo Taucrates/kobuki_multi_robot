@@ -7,16 +7,13 @@ Fecha: marzo 2021
 Ensamblar kobukis- NUC
 ------------------------------------------------------------
 	+	Pieza impresa 3D
-	+	2 tornillos de plástico blanco
+	+	Tornillos y tuercas de plástico
 
 	1) Atornillar la NUC a la base
 
 DC/DC
 ------------------------------------------------------------	
-	+	3 tornillos blancos
-	+	3 soportes negros para elevar el DC/DC
-	+	2 tuercas
-	+	2 arandelas
+	+	Tornillos y tuercas de plástico
 	+	1 agujero con broca (3-3.5mm)
 
 	1) Atornillar los 3 tornillos, 3 soportes y 3 ranuras DC/DC
@@ -42,9 +39,9 @@ Conector desde DC/DC a NUC
 
 Soporte batería
 ------------------------------------------------------------
-	+	1 tornillo blanco
-	+	1 soporte blanco
-	+	1 tuerca
+	+	Tornillos y tuercas de plástico
+
+	1) Atornillar el soporte a la base inferior del kobuki
 
 Soporte sensor (realsense, hokuyo, rplidar)
 ------------------------------------------------------------
