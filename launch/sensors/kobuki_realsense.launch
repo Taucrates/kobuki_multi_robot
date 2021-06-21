@@ -1,0 +1,33 @@
+<!--
+  Launcher for running a realsense camera on a Kobuki
+ -->
+<launch>
+  <arg name="robot_name" default="kobuki"/>
+  <!-- Set TFs required to run Gmapping (commeted because already published by robot_state_publisher)
+  <node pkg="tf" type="static_transform_publisher" name="basefp_to_cam" args="0.145 0.0 0.20 0.0 0.0 0.0 base_footprint camera_link 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="basefp_to_baselink" args="0.0 0.0 0.0 0.0 0.0 0.0 base_footprint base_link 100"/>
+  -->
+
+  <!-- Launch realsense camera -->
+  <group ns="$(arg robot_name)">
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+      <arg name="tf_prefix" value="$(arg robot_name)/camera"/>
+      <arg name="filters" value="disparity,temporal,spatial,decimation"/>
+    </include>
+    
+    <!-- From base_scan (pub by robot_state_pub) to $(arg robot_name)/camera_link frame pub by rs_camera node -->
+    <node pkg="tf" type="static_transform_publisher" name="base_scan_to_camera_link" args="0.0 0.0 0.0 0.0 0.0 0.0 $(arg robot_name)/base_scan $(arg robot_name)/camera_link 100"/>
+  
+    <!-- From dephtimage (provided by realsense) to laserscan msgs -->
+    <node name="depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan"> 
+      <param name="output_frame_id" value="$(arg robot_name)/base_scan"/>
+      <param name="range_min" value="0.25"/> <!--filter ranges below a threshold -->
+      <param name="range_max" value="5"/> <!--filter ranges below a threshold -->
+      <param name="scan_height" value="50"/> <!--en pixeles -->
+
+      <remap from="image" to="/$(arg robot_name)/camera/depth/image_rect_raw"/>
+      <remap from="scan" to="/$(arg robot_name)/scan"/>
+    </node>
+  </group>
+  
+</launch>

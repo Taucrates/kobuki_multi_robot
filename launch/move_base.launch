@@ -1,0 +1,40 @@
+<launch>
+  <!-- Arguments -->
+  <arg name="robot_name" default="kobuki"/>
+  <arg name="kobuki_id" default="0"/>
+  <arg name="init_pose_x" default="0"/>
+  <arg name="init_pose_y" default="0"/>
+  
+  <!-- Move robot base and amcl -->
+  <group ns="$(arg robot_name)">
+
+    <!-- Move base -->
+    <arg name="move_forward_only" default="True"/>
+
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+      <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+      <rosparam file="$(find kobuki_multi_robot)/param/costmap_common_params/$(arg robot_name).yaml" command="load" ns="global_costmap" />
+      <rosparam file="$(find kobuki_multi_robot)/param/costmap_common_params/$(arg robot_name).yaml" command="load" ns="local_costmap" />
+      <rosparam file="$(find kobuki_multi_robot)/param/local_costmap_params.yaml" command="load" />
+      <rosparam file="$(find kobuki_multi_robot)/param/global_costmap_params.yaml" command="load" />
+      <rosparam file="$(find kobuki_multi_robot)/param/move_base_params.yaml" command="load" />
+      <rosparam file="$(find kobuki_multi_robot)/param/dwa_local_planner_params.yaml" command="load" />
+
+      <param name="controller_frequency" value="10.0" />
+      <param name="global_costmap/robot_base_frame" value="$(arg robot_name)/base_footprint"/>
+      <param name="local_costmap/robot_base_frame" value="$(arg robot_name)/base_footprint"/>
+      <param name="local_costmap/global_frame" value="$(arg robot_name)/odom"/>   
+
+      <remap from="map" to="/map"/>
+      <remap from="cmd_vel" to="mobile_base/commands/raw_velocity"/>
+      <remap from="odom" to="odom"/>
+      <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
+
+      <param name="local_costmap/obstacle_layer/laser_scan/topic" value="/$(arg robot_name)/scan"/>
+      <param name="local_costmap/obstacle_layer/laser_scan/sensor_frame" value="$(arg robot_name)/base_scan"/>
+      <param name="local_costmap/obstacle_layer/laser_scan/inf_is_valid" value="true"/>
+
+    </node>
+  </group>
+
+</launch>

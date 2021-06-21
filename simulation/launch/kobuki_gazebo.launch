@@ -1,0 +1,36 @@
+<!-- Launches Kobukis Gazebo simulation in a world -->
+<launch>
+
+  <!-- start Gazebo with an empty world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false"/>
+    <arg name="world_name" value="$(find kobuki_multi_robot)/simulation/environment/srvlab.world"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
+  </include>
+
+  <!-- spawn the robots   -->
+
+  <include file="$(find kobuki_multi_robot)/simulation/includes/robot.launch">
+    <arg name="robot_name" value="kobuki_a"/>
+    <arg name="init_pose" value="-x 0 -y 0 -z 0"/>
+  </include>
+
+  <include file="$(find kobuki_multi_robot)/simulation/includes/robot.launch">
+    <arg name="robot_name" value="kobuki_b"/>
+    <arg name="init_pose" value="-x 2 -y -2 -z 0"/>
+  </include>
+  
+  <include file="$(find kobuki_multi_robot)/simulation/includes/robot.launch">
+    <arg name="robot_name" value="kobuki_c"/>
+    <arg name="init_pose" value="-x 6 -y 0 -z 0"/>
+  </include>
+<!--  
+
+-->
+  <!-- spawn the robot 
+  <include file="$(find kobuki_multi_robot)/simulation/includes/robot.launch">
+    <arg name="robot_name" value="kobuki_d"/>
+    <arg name="init_pose" value="-x -5 -y -1 -z 0"/>
+  </include>
+  -->
+</launch>

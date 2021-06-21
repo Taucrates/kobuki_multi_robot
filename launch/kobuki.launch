@@ -1,0 +1,26 @@
+<!--
+	Launch file to start kobuki with its sensor (realsense or laser)
+
+		Launches minimal launch to start kobuki
+		Launches realsense by default
+		Publishes TFs to link kobuki and rplidar scans
+ -->
+<launch>
+	<arg name="robot_name" default="kobuki"/>
+	<arg name="sensor" default="realsense"/>
+
+	<!-- Kobuki core -->
+	<include file="$(find kobuki_multi_robot)/launch/minimal.launch" >
+		<arg name="robot_name" value="$(arg robot_name)"/>
+	</include>
+
+	<!-- Kobuki's sensor -->
+	<include file="$(find kobuki_multi_robot)/launch/sensors/kobuki_$(arg sensor).launch" >
+		<arg name="robot_name" value="$(arg robot_name)"/>
+	</include>
+
+	<!-- Kobuki description to set bokuki's TF. Also for visualization purposes. -->
+	<include file="$(find kobuki_multi_robot)/launch/kobuki_description.launch" >
+		<arg name="robot_name" value="$(arg robot_name)"/>
+	</include>
+</launch>

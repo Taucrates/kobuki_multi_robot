@@ -1,0 +1,12 @@
+<!--
+ -->
+<launch>
+  <arg name="robot_name" default="kobuki"/>
+  <arg name="kobuki_id" default="1"/>
+  <!-- Multi master slave -->
+  <group ns="$(arg robot_name)">
+    <node pkg="kobuki_multi_robot" type="multi_robot_slave" name="multi_robot_slave" output="screen" >
+      <param name="kobuki_id" type="int" value="$(arg kobuki_id)" />
+    </node>
+  </group>
+</launch>

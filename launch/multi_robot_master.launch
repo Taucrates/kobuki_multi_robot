@@ -1,0 +1,10 @@
+<!--
+ -->
+<launch>
+  <arg name="global_goals_path_file" default="/home/esau/Documents/globalgoals.txt"/>
+  
+  <!-- Multi master slave -->
+  <node pkg="kobuki_multi_robot" type="multi_robot_master" name="multi_robot_master" output="screen" >
+    <param name="global_goals_path_file" type="str" value="$(arg global_goals_path_file)" />
+  </node>
+</launch>
