@@ -1,0 +1,5 @@
+1) [ERROR] Error connecting to Hokuyo: Could not open serial Hokuyo:
+/dev/ttyACM0 @ 115200
+could not open serial device.
+
+Solucion: desconectar la plataforma del kobuki de la NUC y volver a conectar. Es un problema del puerto USB que ocurre si el hokuyo se conecta despues que el kobuki
