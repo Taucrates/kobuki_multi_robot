@@ -22,7 +22,7 @@
 
     <!-- Laser filters -->
     <node name="scan_filter"          pkg="laser_filters"  type="scan_to_scan_filter_chain" output="screen">
-      <rosparam file="$(find kobuki_multi_robot)/param/laser_filters_params.yaml" command="load"/>
+      <rosparam file="$(find kobuki_multi_robot)/param/laser_filter_params.yaml" command="load"/>
       <remap from="scan" to="/$(arg robot_name)/raw_scan"/>
       <remap from="scan_filtered" to="/$(arg robot_name)/scan"/>
     </node>
