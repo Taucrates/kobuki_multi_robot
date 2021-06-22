@@ -12,7 +12,8 @@
   <group ns="$(arg robot_name)">
     <include file="$(find realsense2_camera)/launch/rs_camera.launch">
       <arg name="tf_prefix" value="$(arg robot_name)/camera"/>
-      <arg name="filters" value="disparity,temporal,spatial,decimation"/>
+      <!---<arg name="filters" value="disparity,temporal,spatial,decimation"/>-->
+      <arg name="json_file_path" value="/home/nuc/catkin_ws/src/kobuki_multi_robot/launch/sensors/laseroff.json"/>
     </include>
     
     <!-- From base_scan (pub by robot_state_pub) to $(arg robot_name)/camera_link frame pub by rs_camera node -->
@@ -21,9 +22,9 @@
     <!-- From dephtimage (provided by realsense) to laserscan msgs -->
     <node name="depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan"> 
       <param name="output_frame_id" value="$(arg robot_name)/base_scan"/>
-      <param name="range_min" value="0.25"/> <!--filter ranges below a threshold -->
+      <param name="range_min" value="0.30"/> <!--filter ranges below a threshold -->
       <param name="range_max" value="5"/> <!--filter ranges below a threshold -->
-      <param name="scan_height" value="50"/> <!--en pixeles -->
+      <param name="scan_height" value="25"/> <!--en pixeles -->
 
       <remap from="image" to="/$(arg robot_name)/camera/depth/image_rect_raw"/>
       <remap from="scan" to="/$(arg robot_name)/scan"/>
