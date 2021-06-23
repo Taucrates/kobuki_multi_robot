@@ -10,7 +10,7 @@
   <xacro:kobuki/>
 
   <xacro:include filename="$(find kobuki_multi_robot)/simulation/sensors/xacro/hokuyo.xacro"/>
-  <xacro:laser name="base_scan" parent="base_link" xyz="0.16 0 0.15" rpy="3.1415 0 0" meshes="package://gazebo_plugins/test/multi_robot_scenario/meshes/laser"/>
+  <xacro:laser name="base_scan" parent="base_link" xyz="0.13 0 0.15" rpy="3.1415 0 0" meshes="package://gazebo_plugins/test/multi_robot_scenario/meshes/laser"/>
 
   <!--<xacro:include filename="$(find kobuki_multi_robot)/simulation/sensors/xacro/appendix.xacro"/>
   <xacro:laser name="base_append" parent="base_link" xyz="-0.16 0 0.15" rpy="0 0 0" meshes="package://gazebo_plugins/test/multi_robot_scenario/meshes/laser"/>-->
