@@ -6,7 +6,7 @@
 	<arg name="init_pose_y" default="0"/>
 
 	<!-- odom to map TF -->
-	<node pkg="tf" type="static_transform_publisher" name="robot_to_map" args="$(arg init_pose_x) $(arg init_pose_y) 0.0 0.0 0.0 0.0 /world /$(arg robot_name)/odom 100"/>
+	<node pkg="tf" type="static_transform_publisher" name="robot_to_map" args="$(arg init_pose_x) $(arg init_pose_y) 0.0 0.0 0.0 0.0 /map /$(arg robot_name)/odom 100"/>
 
 	<!-- Kobuki amcl
 	<include file="$(find kobuki_multi_robot)/launch/amcl.launch" >
