@@ -12,7 +12,8 @@
   <xacro:include filename="$(find kobuki_multi_robot)/simulation/sensors/xacro/hokuyo.xacro"/>
   <xacro:laser name="base_scan" parent="base_link" xyz="0.06 0 0.15" rpy="0 0 0" meshes="package://gazebo_plugins/test/multi_robot_scenario/meshes/laser"/>
 
-  <!--Apendix, for the bobukis to be seen by others in gazebo
+  <!--Apendix, for the bobukis to be seen by others in gazebo  -->
+
   <xacro:include filename="$(find kobuki_multi_robot)/simulation/sensors/xacro/appendix.xacro"/>
   <xacro:laser name="base_appendA" parent="base_link" xyz="-0.16 0 0.15" rpy="3.1415 0 0" meshes="package://gazebo_plugins/test/multi_robot_scenario/meshes/laser"/>
 
@@ -27,5 +28,4 @@
  
   <xacro:include filename="$(find kobuki_multi_robot)/simulation/sensors/xacro/appendix.xacro"/>
   <xacro:laser name="base_appendE" parent="base_link" xyz="-0.10 0.10 0.15" rpy="3.1415 0 0" meshes="package://gazebo_plugins/test/multi_robot_scenario/meshes/laser"/>
-  -->
 </robot>

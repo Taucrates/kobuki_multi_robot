@@ -7,7 +7,7 @@
 
   <group ns="$(arg robot_name)">
     <param name="robot_description"
-          command="$(find xacro)/xacro '$(find kobuki_multi_robot)/simulation/urdf/kobuki_standalone.urdf.xacro'"/>
+          command="$(find xacro)/xacro '$(find kobuki_multi_robot)/urdf/kobuki.urdf.xacro'"/>
     <node pkg="gazebo_ros" type="spawn_model" name="spawn_$(arg robot_name)"
           args="$(arg init_pose) -unpause -urdf -param robot_description -model $(arg robot_name)" respawn="false">
     </node>
