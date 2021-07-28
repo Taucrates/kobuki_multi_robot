@@ -3,6 +3,7 @@
  -->
 <launch>  
   <arg name="robot_name" default="kobuki"/>
+  <arg name="serial_port" default="/dev/hokuyo04"/>
 
   <group ns="$(arg robot_name)">
     <!-- Set TFs required to run Gmapping (uncomment if joint_state_publisher is not launched)
@@ -11,7 +12,8 @@
     -->
     <!-- Launch hokuyo laser -->
     <node pkg="urg_node" type="urg_node" name="urg_node">
-      <param name="frame_id" value="$(arg robot_name)/base_scan"/>
+      <param name="port"      value="$(arg serial_port)"/>  
+      <param name="frame_id"  value="$(arg robot_name)/base_scan"/>
       <param name="angle_min" value="-1.745"/>
       <param name="angle_max" value="1.745"/>
     </node>
