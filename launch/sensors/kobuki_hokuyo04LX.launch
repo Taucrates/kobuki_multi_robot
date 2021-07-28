@@ -12,7 +12,7 @@
     -->
     <!-- Launch hokuyo laser -->
     <node pkg="urg_node" type="urg_node" name="urg_node">
-      <param name="port"      value="$(arg serial_port)"/>  
+      <param name="serial_port"      value="$(arg serial_port)"/>  
       <param name="frame_id"  value="$(arg robot_name)/base_scan"/>
       <param name="angle_min" value="-1.745"/>
       <param name="angle_max" value="1.745"/>
