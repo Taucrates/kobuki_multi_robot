@@ -60,5 +60,5 @@ roslaunch kobuki_multi_robot kobuki_gazebo_navigation.launch
 ## Some usage considerations
 * This package provides two ```bash``` files for each kobuki called ```kobuki_start.sh``` and ```kobuki_navigation.sh``` to make deployment of the kobukis easier. Each kobuki has to access its respective folder in the main folder ```start_and_nav```. Running ```source permissions.sh``` gives both start and navigation files executing permissions.
 * ```kobuki_start.sh``` has to be executed before ```kobuki_navigation.sh```
-* ```kobuki_d```has a RPLIDAR mounted. This sensor provides a range of 360 scans but the scans placed in the 'back' of the kobuki have been 'removed' by means of [laser filter](http://wiki.ros.org/laser_filters) node. However, the messages published in the topic ```/kobuki_d/scan``` contain 360 scans and de 'removed' scans have values of ```range_max + 1```, which is assumed to be an error case. 
+* ```kobuki_d```has a RPLIDAR mounted. This sensor provides a range of 360 scans but the scans placed in the 'back' of the kobuki have been 'removed' by means of [laser filter](http://wiki.ros.org/laser_filters) node. However, the messages published in the topic ```/kobuki_d/scan``` contain 360 scans and the 'removed' scans have values of ```range_max + 1```, which is assumed to be an error case. 
 
