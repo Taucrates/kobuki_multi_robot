@@ -66,4 +66,3 @@ roslaunch kobuki_multi_robot kobuki_gazebo_navigation.launch
 
 - The first time the navigation stack nodes are launched the cost map does not update properly and will always be 'empty'
 	- Solution: Run ```kobuki_navigation.sh```, let everything be initialized until you get to the ```odom received!``` message in your terminal, cancel the execution and run the same file again.  In this way the cost map is updated correctly and the navigation stack runs properly.
-- 
