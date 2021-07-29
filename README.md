@@ -43,7 +43,6 @@ Map can be chosen setting ```map_name``` with values ```srvlab``` or ```willowga
 ## Usage in simulation
 
 ### Launch gazebo with environment, kobuki and its sensor (on base station)
-------------------------------------------------------------
 Launches similation environment. The number of kobukis, their name and their initial position have to be specified in ```kobuki_gazebo.launch``` file
 
 ```bash
@@ -57,6 +56,7 @@ Launches [navigation stack](http://wiki.ros.org/navigation) for each kobuki in s
 roslaunch kobuki_multi_robot kobuki_gazebo_navigation.launch
 ```
 
+------------------------------------------------------------
 ## Some usage considerations
 * This package provides two ```bash``` files for each kobuki called ```kobuki_start.sh``` and ```kobuki_navigation.sh``` to make deployment of the kobukis easier. Each kobuki has to access its respective folder in the main folder ```start_and_nav```. Running ```source permissions.sh``` gives both start and navigation files executing permissions.
 * ```kobuki_start.sh``` has to be executed before ```kobuki_navigation.sh```
