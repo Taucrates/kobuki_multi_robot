@@ -9,6 +9,7 @@ Copy this repository to your catkin workspace src folder:
 git clone https://github.com/esauortiz/kobuki_multi_robot.git
 ```
 
+------------------------------------------------------------
 ## Usage in real environment
 ### Launch kobuki and its sensor (on kobuki)
 Launches kobuki and its sensor
@@ -40,6 +41,7 @@ roslaunch kobuki_multi_robot test.launch map_name
 ```
 Map can be chosen setting ```map_name``` with values ```srvlab``` or ```willowgarage```.
 
+------------------------------------------------------------
 ## Usage in simulation
 
 ### Launch gazebo with environment, kobuki and its sensor (on base station)
