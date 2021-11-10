@@ -61,7 +61,7 @@ Instrucciones adicionales
 
 - Para el hokuyo 20LX
 	+ La dirección por defecto del hokuyo es 192.168.0.10
-	+ Configurar puerto ethernet como 192.168.0.20/25
+	+ Configurar puerto ethernet (p.e. como 192.168.0.20/25)
 	+ rosrun urg_node urg_node _ip_address:=192.168.0.10
 
 - Para el RPLIDAR
