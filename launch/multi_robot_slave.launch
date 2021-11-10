@@ -1,4 +1,8 @@
 <!--
+  Launch file to run multi_robot_slave not on each kobuki. Multi robot slave subscribes to the 
+  `\my_global_goals` topic and reads the identifier to verify if it corresponds to  a  command 
+  for the kobuki on which this node runs. In addition this node calls "clear_costmaps" service 
+  to avoid bad local planner behaviour
  -->
 <launch>
   <arg name="robot_name" default="kobuki"/>
