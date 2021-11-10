@@ -2,27 +2,25 @@
 	<!-- Arguments -->
 	<arg name="robot_name" default="kobuki"/>
 	<arg name="kobuki_id" default="0"/>
-	<arg name="init_pose_x" default="0"/>
-	<arg name="init_pose_y" default="0"/>
+	<arg name="mission" default="default"/>
 
-	<!-- odom to map TF -->
+	<!-- odom to map TF
 	<node pkg="tf" type="static_transform_publisher" name="robot_to_map" args="$(arg init_pose_x) $(arg init_pose_y) 0.0 0.0 0.0 0.0 /map /$(arg robot_name)/odom 100"/>
-
-	<!-- Kobuki amcl
+	-->
+	
+	<!-- Kobuki amcl-->
 	<include file="$(find kobuki_multi_robot)/launch/amcl.launch" >
+		<rosparam file="$(find kobuki_multi_robot)/param/missions/$(arg mission).yaml" command="load"/>
 		<arg name="robot_name" value="$(arg robot_name)"/>
 		<arg name="kobuki_id" value="$(arg kobuki_id)"/>
-		<arg name="init_pose_x" value="$(arg init_pose_x)"/>
-		<arg name="init_pose_y" value="$(arg init_pose_y)"/>
-	</include>-->
+	</include>
 
 	
 	<!-- Kobuki move_base
 	<include file="$(find kobuki_multi_robot)/launch/move_base.launch" >
+		<rosparam file="$(find kobuki_multi_robot)/param/missions/$(arg mission).yaml" command="load"" />
 		<arg name="robot_name" value="$(arg robot_name)"/>
 		<arg name="kobuki_id" value="$(arg kobuki_id)"/>
-		<arg name="init_pose_x" value="$(arg init_pose_x)"/>
-		<arg name="init_pose_y" value="$(arg init_pose_y)"/>
 	</include>-->
 
 	<!-- Velocitiy smoother -->
