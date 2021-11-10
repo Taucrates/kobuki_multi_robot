@@ -1,7 +1,6 @@
 <launch>
   <!-- Arguments -->
   <arg name="robot_name" default="kobuki"/>
-  <arg name="kobuki_id" default="0"/>
   <arg name="mission" default="default"/> <!-- Please configure a mission at $(find kobuki_multi_robot)/param/missions-->
   
   <group ns="$(arg robot_name)">
