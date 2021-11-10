@@ -14,23 +14,22 @@
   <!-- rviz w/ configuration-->    
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kobuki_multi_robot)/rviz/$(arg rviz_file).rviz" />
   
-  <!-- map publisher -->
+  <!-- map publisher (if a map has already been created) ([!] UNCOMMENT AMCL launch on kobuki_navigation.launch) -->
 
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
     <param name="frame_id" value="/map" />
   </node>
   
-  <!-- Global goals publisher 
+  <!-- Global goals publisher. [!] If used UNCOMMNET goal listener launch on kobuki_navigation.launch
   <include file="$(find kobuki_multi_robot)/launch/multi_robot_master.launch"/>
   -->    
 
-  <!-- 
+  <!-- Gmapping (if a map has not been created yet) ([!] COMMNET AMCL launch on kobuki_navigation.launch)
   <arg name="robot_name" default="kobuki"/>
     <node pkg="gmapping" type="slam_gmapping" name="gmapping_thing" output="screen" >
     <remap from="scan" to="$(arg robot_name)/scan" />
     <param name="odom_frame" value="$(arg robot_name)/odom" />
     <param name="base_frame" value="$(arg robot_name)/base_link" />
   </node> -->
-
   
 </launch>
