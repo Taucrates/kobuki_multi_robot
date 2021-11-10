@@ -2,9 +2,8 @@
   <!-- Arguments -->
   <arg name="robot_name" default="kobuki"/>
   <arg name="kobuki_id" default="0"/>
-  <arg name="mission" default="default"/>
+  <arg name="mission" default="default"/> <!-- Please configure a mission at $(find kobuki_multi_robot)/param/missions-->
   
-  <!-- Move robot base and amcl -->
   <group ns="$(arg robot_name)">
     <!-- AMCL -->
     <node pkg="amcl" type="amcl" name="amcl">
