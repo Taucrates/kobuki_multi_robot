@@ -6,28 +6,31 @@
   <arg name="map_name" default="srvlab"/>
   <arg name="map_file" default="$(find kobuki_multi_robot)/maps/$(arg map_name).yaml"/>
 
-  <!-- World to map TF --> 
-  <node pkg="tf" type="static_transform_publisher" name="world_to_map" args="1.0 3.0 0.0 0.0 0.0 0.0 /world /map 100"/>
+  <!-- World to map TF -->
+  <!-- subterraneo args="1.95 22.85 0.0 -3.10159265359 0.0 0.0 /world /map 1"-->
+  <!-- srvlab args="1.0 3.0 0.0 0.0 0.0 0.0 /world /map 100"-->
+  <node pkg="tf" type="static_transform_publisher" name="world_to_map" args="1.0 3.0 0.0 0.0 0.0 0.0 /world /map 1"/>
 
   <!-- rviz w/ configuration-->    
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kobuki_multi_robot)/rviz/$(arg rviz_file).rviz" />
   
-  <!-- map publisher -->    
+  <!-- map publisher -->
+
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
     <param name="frame_id" value="/map" />
   </node>
-
-  <!-- Global goals publisher -->    
+  
+  <!-- Global goals publisher 
   <include file="$(find kobuki_multi_robot)/launch/multi_robot_master.launch"/>
+  -->    
 
-  <!--  
-
+  <!-- 
   <arg name="robot_name" default="kobuki"/>
     <node pkg="gmapping" type="slam_gmapping" name="gmapping_thing" output="screen" >
     <remap from="scan" to="$(arg robot_name)/scan" />
     <param name="odom_frame" value="$(arg robot_name)/odom" />
     <param name="base_frame" value="$(arg robot_name)/base_link" />
-  </node>
-  -->
+  </node> -->
 
+  
 </launch>
