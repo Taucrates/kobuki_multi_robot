@@ -14,12 +14,11 @@
 		<arg name="kobuki_id" value="$(arg kobuki_id)"/>
 		<arg name="mission" value="$(arg mission)"/>
 	</include>
-
 	
-	<!-- Kobuki move_base
+	<!-- Kobuki move_base-->
 	<include file="$(find kobuki_multi_robot)/launch/move_base.launch" >
 		<arg name="robot_name" value="$(arg robot_name)"/>
-	</include>-->
+	</include>
 
 	<!-- Velocitiy smoother -->
 	<include file="$(find kobuki_multi_robot)/launch/velocity_smoother.launch">
