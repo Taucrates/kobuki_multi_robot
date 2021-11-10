@@ -18,7 +18,6 @@
 	
 	<!-- Kobuki move_base
 	<include file="$(find kobuki_multi_robot)/launch/move_base.launch" >
-		<rosparam file="$(find kobuki_multi_robot)/param/missions/$(arg mission).yaml" command="load"" />
 		<arg name="robot_name" value="$(arg robot_name)"/>
 		<arg name="kobuki_id" value="$(arg kobuki_id)"/>
 	</include>-->
