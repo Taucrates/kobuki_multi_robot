@@ -1,7 +1,8 @@
 /**
  * @Author: Esau Ortiz Toribio
  * @File: multi_robot_master.cpp
- * @Description: Multi robot master. Reads a list of global goals and randomly assign them to a kobuki
+ * @Description: Multi robot master. Reads a list of global goals file and publishes them 
+ *               everytime a signal (new_global_goals) arrives from `\update_global_goals` topic.
  * @Date: March 2021
  */
 
