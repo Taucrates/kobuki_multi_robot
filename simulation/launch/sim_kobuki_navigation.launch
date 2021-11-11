@@ -1,0 +1,11 @@
+<!-- Launches Kobukis Gazebo simulation in a world -->
+<launch>
+  <arg name="mission" value="default"/>
+
+  <include file="$(find kobuki_multi_robot)/launch/kobuki_navigation.launch">
+    <arg name="robot_name" value="kobuki_a"/>
+    <arg name="kobuki_id"  value="1"/>
+    <arg name="mission" value="$(arg mission)"/>
+  </include>
+
+</launch>

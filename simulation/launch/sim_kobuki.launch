@@ -1,5 +1,6 @@
 <!-- Launches Kobukis Gazebo simulation in a world -->
 <launch>
+  <arg name="mission" value="default"/>
 
   <!-- start Gazebo with an empty world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -9,28 +10,29 @@
   </include>
 
   <!-- spawn the robots   -->
-
   <include file="$(find kobuki_multi_robot)/simulation/includes/robot.launch">
     <arg name="robot_name" value="kobuki_a"/>
-    <arg name="init_pose" value="-x 0 -y 0 -z 0"/>
+    <arg name="initial_pose_x" value="0"/>
   </include>
 
   <include file="$(find kobuki_multi_robot)/simulation/includes/robot.launch">
     <arg name="robot_name" value="kobuki_b"/>
-    <arg name="init_pose" value="-x 2 -y -2 -z 0"/>
+    <arg name="initial_pose_x" value="1"/>
   </include>
-  
+
   <include file="$(find kobuki_multi_robot)/simulation/includes/robot.launch">
     <arg name="robot_name" value="kobuki_c"/>
-    <arg name="init_pose" value="-x 6 -y 0 -z 0"/>
+    <arg name="initial_pose_x" value="2"/>
   </include>
-<!--  
 
--->
-  <!-- spawn the robot 
   <include file="$(find kobuki_multi_robot)/simulation/includes/robot.launch">
     <arg name="robot_name" value="kobuki_d"/>
-    <arg name="init_pose" value="-x -5 -y -1 -z 0"/>
+    <arg name="initial_pose_x" value="3"/>
   </include>
-  -->
+
+  <include file="$(find kobuki_multi_robot)/simulation/includes/robot.launch">
+    <arg name="robot_name" value="kobuki_e"/>
+    <arg name="initial_pose_x" value="4"/>
+  </include>
+
 </launch>
