@@ -3,13 +3,15 @@
   -->
 <launch>
   <arg name="robot_name" default="mobile_base"/>
-  <arg name="init_pose" default="-x 0 -y 0 -z 0"/>
+  <arg name="initial_pose_x" default="0"/>
+  <arg name="initial_pose_y" default="0"/>
+  <arg name="initial_pose_a" default="0"/>
 
   <group ns="$(arg robot_name)">
     <param name="robot_description"
           command="$(find xacro)/xacro '$(find kobuki_multi_robot)/urdf/kobuki.urdf.xacro'"/>
     <node pkg="gazebo_ros" type="spawn_model" name="spawn_$(arg robot_name)"
-          args="$(arg init_pose) -unpause -urdf -param robot_description -model $(arg robot_name)" respawn="false">
+          args="-x $(arg initial_pose_x) -y $(arg initial_pose_y) -Y $(arg initial_pose_a) -unpause -urdf -param robot_description -model $(arg robot_name)" respawn="false">
     </node>
 
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
