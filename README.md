@@ -3,7 +3,7 @@
 This package includes ROS launch files for starting up kobukis with their respective sensors (RealSense, Hokuyo or RPLIDAR). The required packages for each kobuki's NUC are assumed to be installed.
 
 ## How to build kobuki_multi_robot package
-Copy this repository to your catkin workspace src folder:
+Copy this repository to your catkin workspace [src](https://github.com/esauortiz/kobuki_multi_robot/tree/master/src) folder:
  
 ```bash
 git clone https://github.com/esauortiz/kobuki_multi_robot.git
@@ -33,7 +33,7 @@ This roslaunch file could be also run with the next .sh file placed in [start_an
 ./kobuki_start.sh
 ```
 
-Each kobuki has environmental variables defined in the .bashrc file in order to complete robot_name and sensor arguments.
+Each kobuki has environmental variables defined in the .bashrc file in order to complete ```robot_name``` and ```sensor``` arguments.
 
 ### Launch kobuki navigation (on kobuki)
 
@@ -43,17 +43,17 @@ Launches [navigation stack](http://wiki.ros.org/navigation) and ```goal listener
 	
 * Kobuki name is specified with ```robot_name``` parameter and can take the following values: ```kobuki_a```, ```kobuki_b```, ```kobuki_c```, ```kobuki_d``` and ```kobuki_e```.
 
-* Kobuki id is specified with ```kobuki_id``` parameter and can takes and integer value.
+* Kobuki id is specified with ```kobuki_id``` parameter as an integer value.
 
-* [AMCL](http://wiki.ros.org/amcl) node requires and initial kobuki pose specified with ```init_pose_x```, ```init_pose_y``` and ```init_pose_a```. This arguments are defined in [param/missions](https://github.com/esauortiz/kobuki_multi_robot/tree/master/param/missions) folder.
+* [AMCL](http://wiki.ros.org/amcl) node requires an initial kobuki pose specified with ```init_pose_x```, ```init_pose_y``` and ```init_pose_a``` (x, y and yaw). This arguments should be defined in [param/missions](https://github.com/esauortiz/kobuki_multi_robot/tree/master/param/missions) folder.
 
-This roslaunch file could be also run with the next .sh file place in [start_and_nav](https://github.com/esauortiz/kobuki_multi_robot/tree/master/start_and_nav) folder.
+This roslaunch file could be also run with the next .sh file placed in [start_and_nav](https://github.com/esauortiz/kobuki_multi_robot/tree/master/start_and_nav) folder.
 
 ```bash
 ./kobuki_navigation.sh --mission default
 ```
 
-Each kobuki has environmental variables defined in the .bashrc file in order to complete robot_name and sensor arguments. The mission (option -m|--mission) has to be specified in order to provide an initial pose for each kobuki.
+Each kobuki has environmental variables defined in the .bashrc file in order to complete ```robot_name``` and ```sensor``` arguments. The mission (option -m|--mission) has to be specified in order to provide an initial pose for each kobuki.
 
 ### Launch test (on base station)
 Launches ```kobuki description```, ```rviz``` and ```goal master publisher```. Goal master publications are triggered by ```rostopic pub /update_global_goals std_msgs/Int8 "data: 1"``` (see README file in [src](https://github.com/esauortiz/kobuki_multi_robot/tree/master/src) folder)
