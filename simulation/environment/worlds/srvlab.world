@@ -103,7 +103,7 @@
           <pose frame=''>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>/home/esau/catkin_ws/src/kobuki_multi_robot/simulation/environment/srvlab.dae</uri>
+              <uri>model://srvlab/meshes/srvlab.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -111,7 +111,7 @@
             <lighting>1</lighting>
             <script>
               <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
+              <name>Gazebo/PaintedWall</name>
             </script>
           </material>
           <transparency>0</transparency>
@@ -123,7 +123,7 @@
           <pose frame=''>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>/home/esau/catkin_ws/src/kobuki_multi_robot/simulation/environment/srvlab.dae</uri>
+              <uri>model://srvlab/meshes/srvlab.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
