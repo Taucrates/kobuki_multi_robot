@@ -1,7 +1,7 @@
 <launch>
   <!-- Arguments -->
   <arg name="robot_name" default="kobuki"/>
-  <arg name="mission" default="default"/> <!-- Please configure a mission at $(find kobuki_multi_robot)/param/missions-->
+  <arg name="mission_label" default="default"/> <!-- Please configure a mission at $(find kobuki_multi_robot)/param/missions-->
   
   <group ns="$(arg robot_name)">
     <!-- AMCL -->
@@ -9,7 +9,7 @@
       <!-- amcl configuration -->
       <rosparam file="$(find kobuki_multi_robot)/param/amcl.yaml" command="load"/>
       <!-- initial pose given a mission -->
-      <rosparam file="$(find kobuki_multi_robot)/param/missions/$(arg mission)/$(arg robot_name).yaml" command="load"/>
+      <rosparam file="$(find kobuki_multi_robot)/param/missions/$(arg mission_label)/$(arg robot_name).yaml" command="load"/>
 
       <param name="odom_frame_id"  value="$(arg robot_name)/odom"/>
       <param name="base_frame_id"  value="$(arg robot_name)/base_footprint"/>

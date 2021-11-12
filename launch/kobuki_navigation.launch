@@ -2,7 +2,7 @@
 	<!-- Arguments -->
 	<arg name="robot_name" default="kobuki"/>
 	<arg name="kobuki_id" default="0"/>
-	<arg name="mission" default="default"/>
+	<arg name="mission_label" default="default"/>
 
 	<!-- odom to map TF
 	<node pkg="tf" type="static_transform_publisher" name="robot_to_map" args="$(arg init_pose_x) $(arg init_pose_y) 0.0 0.0 0.0 0.0 /map /$(arg robot_name)/odom 100"/>
@@ -11,7 +11,7 @@
 	<!-- Kobuki amcl-->
 	<include file="$(find kobuki_multi_robot)/launch/amcl.launch" >
 		<arg name="robot_name" value="$(arg robot_name)"/>
-		<arg name="mission" value="$(arg mission)"/>
+		<arg name="mission_label" value="$(arg mission_label)"/>
 	</include>
 	
 	<!-- Kobuki move_base-->
