@@ -2,7 +2,7 @@
 <launch>
   <arg name="world_label" default="srvlab"/>
 
-  <!-- start Gazebo with an empty world -->
+  <!-- start Gazebo -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <env name="GAZEBO_MODEL_PATH" value="$(find kobuki_multi_robot)/simulation/environment/models"/>
     <arg name="use_sim_time" value="true"/>
