@@ -20,9 +20,8 @@
     <param name="frame_id" value="/map" />
   </node>
   
-  <!-- Global goals publisher. [!] If used UNCOMMNET goal listener launch on kobuki_navigation.launch
+  <!-- Global goals publisher. [!] If launched then UNCOMMNET goal listener launch on kobuki_navigation.launch  -->    
   <include file="$(find kobuki_multi_robot)/launch/multi_robot_master.launch"/>
-  -->    
 
   <!-- Gmapping (if a map has not been created yet) ([!] COMMNET AMCL launch on kobuki_navigation.launch)
   <arg name="robot_name" default="kobuki"/>
