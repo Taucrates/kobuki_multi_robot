@@ -10,6 +10,7 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   message_generation
   tf2_ros
+  gazebo_msgs
 )
 
 ## Generate messages in the 'msg' folder
@@ -23,6 +24,7 @@ find_package(catkin REQUIRED COMPONENTS
    DEPENDENCIES
    std_msgs
    geometry_msgs
+   gazebo_msgs
  )
 
 ###################################
@@ -30,7 +32,7 @@ find_package(catkin REQUIRED COMPONENTS
 ###################################
 catkin_package(
 #  LIBRARIES kobuki_multi_robot
-  CATKIN_DEPENDS roscpp roslaunch rospy std_msgs geometry_msgs message_runtime tf2_ros
+  CATKIN_DEPENDS roscpp roslaunch rospy std_msgs geometry_msgs message_runtime tf2_ros gazebo_msgs
 #  DEPENDS system_lib
 )
 
@@ -49,7 +51,9 @@ target_link_libraries(multi_robot_master ${catkin_LIBRARIES})
 add_executable(multi_robot_slave src/multi_robot_slave.cpp)
 target_link_libraries(multi_robot_slave ${catkin_LIBRARIES})
 
+add_executable(model_state_setter src/model_state_setter.cpp)
+target_link_libraries(model_state_setter ${catkin_LIBRARIES})
+
 # deps
 add_dependencies(multi_robot_master kobuki_multi_robot_generate_messages_cpp)
 add_dependencies(multi_robot_slave kobuki_multi_robot_generate_messages_cpp)
-
