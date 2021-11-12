@@ -1,4 +1,5 @@
-<!-- Launches Kobukis Gazebo simulation in a world -->
+<!--  Launches node to place kobukis properly inside the simulation 
+      and navigation nodes -->
 <launch>
   <arg name="mission" value="default"/>
 
