@@ -14,7 +14,7 @@ using namespace std;
 
 int main(int argc,char **argv)
 {
-    ros::init(argc,argv,"model_state_setter");
+    ros::init(argc, argv, "model_state_setter");
     ros::NodeHandle nh;
     ros::ServiceClient client = nh.serviceClient<gazebo_msgs::SetModelState>("/gazebo/set_model_state");
 
@@ -26,10 +26,10 @@ int main(int argc,char **argv)
     tf2::Quaternion my_quaternion;
 
     // read params
-    nh.getParam("/model_state_setter/robot_name", kobuki_name);
-    nh.getParam("/model_state_setter/initial_pose_x", initial_pose_x);
-    nh.getParam("/model_state_setter/initial_pose_y", initial_pose_y);
-    nh.getParam("/model_state_setter/initial_pose_a", initial_pose_a);
+    nh.getParam("model_state_setter/robot_name", kobuki_name);
+    nh.getParam("model_state_setter/initial_pose_x", initial_pose_x);
+    nh.getParam("model_state_setter/initial_pose_y", initial_pose_y);
+    nh.getParam("model_state_setter/initial_pose_a", initial_pose_a);
 
     // position
     geometry_msgs::Point kobuki_position;
