@@ -24,10 +24,9 @@
 		<arg name="robot_name" value="$(arg robot_name)"/>
 	</include>
 
-	<!-- Global goal listener 
+	<!-- Global goal listener. [!] If launched then UNCOMMNET global goals publisher launch on kobuki_navigation.launch-->
 	<include file="$(find kobuki_multi_robot)/launch/multi_robot_slave.launch" >
 		<arg name="robot_name" value="$(arg robot_name)"/>
 		<arg name="kobuki_id" value="$(arg kobuki_id)"/>
 	</include>
-	-->
 </launch>
