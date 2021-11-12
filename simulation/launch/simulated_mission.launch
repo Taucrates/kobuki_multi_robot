@@ -6,30 +6,30 @@
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!-- Nodes to call service placing kobukis in simulation -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <node name="model_state_setter" pkg="kobuki_multi_robot" type="model_state_setter" output="screen">
-    <param name="robot_name" value="kobuki_a"/>
-    <rosparam file="$(find kobuki_multi_robot)/param/missions/$(arg mission)/kobuki_a.yaml" command="load"/>
-  </node>
+  <include file="$(find kobuki_multi_robot)/simulation/launch/model_state_setter.launch">
+    <arg name="robot_name" value="kobuki_a"/>
+    <arg name="mission" value="$(arg mission)"/>
+  </include>
 
-  <node name="model_state_setter" pkg="kobuki_multi_robot" type="model_state_setter" output="screen">
-    <param name="robot_name" value="kobuki_b"/>
-    <rosparam file="$(find kobuki_multi_robot)/param/missions/$(arg mission)/kobuki_b.yaml" command="load"/>
-  </node>
+  <include file="$(find kobuki_multi_robot)/simulation/launch/model_state_setter.launch">
+    <arg name="robot_name" value="kobuki_b"/>
+    <arg name="mission" value="$(arg mission)"/>
+  </include>
 
-  <node name="model_state_setter" pkg="kobuki_multi_robot" type="model_state_setter" output="screen">
-    <param name="robot_name" value="kobuki_c"/>
-    <rosparam file="$(find kobuki_multi_robot)/param/missions/$(arg mission)/kobuki_c.yaml" command="load"/>
-  </node>
+  <include file="$(find kobuki_multi_robot)/simulation/launch/model_state_setter.launch">
+    <arg name="robot_name" value="kobuki_c"/>
+    <arg name="mission" value="$(arg mission)"/>
+  </include>
 
-  <node name="model_state_setter" pkg="kobuki_multi_robot" type="model_state_setter" output="screen">
-    <param name="robot_name" value="kobuki_d"/>
-    <rosparam file="$(find kobuki_multi_robot)/param/missions/$(arg mission)/kobuki_d.yaml" command="load"/>
-  </node>
+  <include file="$(find kobuki_multi_robot)/simulation/launch/model_state_setter.launch">
+    <arg name="robot_name" value="kobuki_d"/>
+    <arg name="mission" value="$(arg mission)"/>
+  </include>
 
-  <node name="model_state_setter" pkg="kobuki_multi_robot" type="model_state_setter" output="screen">
-    <param name="robot_name" value="kobuki_e"/>
-    <rosparam file="$(find kobuki_multi_robot)/param/missions/$(arg mission)/kobuki_e.yaml" command="load"/>
-  </node>
+  <include file="$(find kobuki_multi_robot)/simulation/launch/model_state_setter.launch">
+    <arg name="robot_name" value="kobuki_e"/>
+    <arg name="mission" value="$(arg mission)"/>
+  </include>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!-- Navigation nodes                                    -->
@@ -41,25 +41,25 @@
   </include>
 
   <include file="$(find kobuki_multi_robot)/launch/kobuki_navigation.launch">
-    <arg name="robot_name" value="kobuki_a"/>
+    <arg name="robot_name" value="kobuki_b"/>
     <arg name="kobuki_id"  value="2"/>
     <arg name="mission" value="$(arg mission)"/>
   </include>
 
   <include file="$(find kobuki_multi_robot)/launch/kobuki_navigation.launch">
-    <arg name="robot_name" value="kobuki_a"/>
+    <arg name="robot_name" value="kobuki_c"/>
     <arg name="kobuki_id"  value="3"/>
     <arg name="mission" value="$(arg mission)"/>
   </include>
 
   <include file="$(find kobuki_multi_robot)/launch/kobuki_navigation.launch">
-    <arg name="robot_name" value="kobuki_a"/>
+    <arg name="robot_name" value="kobuki_d"/>
     <arg name="kobuki_id"  value="4"/>
     <arg name="mission" value="$(arg mission)"/>
   </include>
 
   <include file="$(find kobuki_multi_robot)/launch/kobuki_navigation.launch">
-    <arg name="robot_name" value="kobuki_a"/>
+    <arg name="robot_name" value="kobuki_e"/>
     <arg name="kobuki_id"  value="5"/>
     <arg name="mission" value="$(arg mission)"/>
   </include>
