@@ -119,7 +119,7 @@ void publishGlobalGoal(const std::vector<float>& global_goal_vect, ros::Publishe
     global_goal.id = global_goal_vect[0];
     //global_goal.pose_stamped.header.seq = ros::Time::now();
     global_goal.pose_stamped.header.stamp = ros::Time::now();
-    global_goal.pose_stamped.header.frame_id = "world";    // global goal read from file is referenced to world frame 
+    global_goal.pose_stamped.header.frame_id = "map";    // global goal read from file is referenced to map frame 
     global_goal.pose_stamped.pose.position.x = global_goal_vect[1];
     global_goal.pose_stamped.pose.position.y = global_goal_vect[2];
     global_goal.pose_stamped.pose.position.z = global_goal_vect[3];
@@ -127,15 +127,16 @@ void publishGlobalGoal(const std::vector<float>& global_goal_vect, ros::Publishe
     // from roll pitch yaw to x,y,z,w
     tf2::Quaternion quaternion;
     quaternion.setRPY( global_goal_vect[4], global_goal_vect[5], global_goal_vect[6]);  // Create this quaternion from roll/pitch/yaw (in radians)
+    quaternion = quaternion.normalize();
     global_goal.pose_stamped.pose.orientation = tf2::toMsg(quaternion);
 
-    // from world to map // global goals file is assumed to be referenced to the world frame
+    /* from world to map // global goals file is assumed to be referenced to the world frame
     tf2_ros::Buffer tf_buffer;
     tf2_ros::TransformListener tf2_listener(tf_buffer);
     geometry_msgs::TransformStamped world_to_map;
     world_to_map = tf_buffer.lookupTransform("map", "world", ros::Time(0), ros::Duration(1.0) ); // target: map, source: world
     tf2::doTransform(global_goal.pose_stamped, global_goal.pose_stamped, world_to_map); 
-
+    */
     // pub
     global_goal_pub->publish(global_goal);
 }

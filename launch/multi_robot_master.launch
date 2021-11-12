@@ -4,7 +4,7 @@
 
  -->
 <launch>
-  <arg name="global_goals_path_file" default="$(find kobuki_multi_robot)/param/global_goals/globalgoals.txt"/>
+  <arg name="global_goals_path_file" default="$(find kobuki_multi_robot)/param/global_goals/global_goals.txt"/>
   
   <!-- Multi master slave -->
   <node pkg="kobuki_multi_robot" type="multi_robot_master" name="multi_robot_master" output="screen" >
