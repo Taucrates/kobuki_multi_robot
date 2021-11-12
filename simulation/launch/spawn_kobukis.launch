@@ -1,13 +1,5 @@
-<!-- Launches Kobukis Gazebo simulation in a world -->
+<!-- Launches kobukis spawn in gazebo simulation -->
 <launch>
-  <arg name="mission" value="default"/>
-
-  <!-- start Gazebo with an empty world -->
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="use_sim_time" value="true"/>
-    <arg name="debug" value="false"/>
-    <arg name="world_name" value="$(find kobuki_multi_robot)/simulation/environment/srvlab.world"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
-  </include>
 
   <!-- spawn the robots (placing them at different x coordinates to avoid random collisions) -->
   <include file="$(find kobuki_multi_robot)/simulation/includes/robot.launch">
