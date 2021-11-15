@@ -12,7 +12,7 @@
   <node pkg="tf" type="static_transform_publisher" name="world_to_map" args="1.0 3.0 0.0 0.0 0.0 0.0 /world /map 1"/>
 
   <!-- rviz w/ configuration-->    
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kobuki_multi_robot)/rviz/$(arg rviz_file).rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kobuki_multi_robot)/rviz/$(arg rviz_file).rviz" output="log"/>
   
   <!-- map publisher (if a map has already been created) ([!] UNCOMMENT AMCL launch on kobuki_navigation.launch) -->
 
