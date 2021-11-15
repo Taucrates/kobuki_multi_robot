@@ -26,6 +26,10 @@ roslaunch kobuki_multi_robot base_station.launch map_name
 ```
 See available maps in [maps](https://github.com/esauortiz/kobuki_multi_robot/tree/master/maps) folder.
 
+By default srvlab map is used:
+
+![](https://github.com/esauortiz/kobuki_multi_robot/blob/master/documentation/pictures/launch_base_station.png){:height="50%" width="50%"}
+
 ### Launch kobuki and its sensor (on kobuki)
 Launch kobuki and its sensor.
 
