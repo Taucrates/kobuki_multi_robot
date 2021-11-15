@@ -28,7 +28,7 @@ See available maps in [maps](https://github.com/esauortiz/kobuki_multi_robot/tre
 
 By default srvlab map is used:
 
-![](https://github.com/esauortiz/kobuki_multi_robot/blob/master/documentation/pictures/launch_base_station.png){:height="50%" width="50%"}
+![](https://github.com/esauortiz/kobuki_multi_robot/blob/master/documentation/pictures/launch_base_station.png?v=4&s=100)
 
 ### Launch kobuki and its sensor (on kobuki)
 Launch kobuki and its sensor.
