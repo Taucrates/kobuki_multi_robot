@@ -66,7 +66,7 @@ int main(int argc, char **argv)
     ros::service::waitForService("move_base/clear_costmaps");
     ros::ServiceClient clearClient = SAPObject.n_.serviceClient<std_srvs::Empty>("move_base/clear_costmaps");
     std_srvs::Empty srv;
-    if(loop_counter == 100){
+    if(loop_counter == 300){
       //ROS_INFO("Checking if there is new goals for this kobuki");
       // Posible mejora del criterio para elegir la frecuencia
       // de llamada la servicio: comprobar si la velocidad en x es != 0
