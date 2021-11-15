@@ -15,6 +15,6 @@
   <!--Apendix, for the bobukis to be seen by others in gazebo  -->
 
   <xacro:include filename="$(find kobuki_multi_robot)/simulation/kobuki_parts/custom_part.xacro"/>
-  <xacro:custom_part name="base_shell" parent="base_link" xyz="-0.16 0 0.15" rpy="3.1415 0 0" uriheader="$(find kobuki_multi_robot)/simulation/kobuki_parts/meshes" part="kobuki_shell"/>
+  <xacro:custom_part name="base_shell" parent="base_link" xyz="0 0 0.1" rpy="0 0 -1.57" uriheader="$(find kobuki_multi_robot)/simulation/kobuki_parts/meshes" part="kobuki_shell"/>
 
 </robot>
