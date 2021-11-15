@@ -90,7 +90,7 @@ roslaunch kobuki_multi_robot simulated_mission.launch mission_label
 ```
 
 ### Mission example
-This package provides a default mission and a file with global goals. Running simulation launch files with ```mission_label = default``` and ```map_name = srvlab``` will set up default mission. In order to trigger global goals publications run: 
+This package provides a default mission and a file with global goals. Running simulation launch files with ```mission_label:=default``` and ```map_name:=srvlab``` will set up default mission. In order to trigger global goals publications run: 
 
 ```bash 
 rostopic pub /update_global_goals std_msgs/Int8 "data: 1"
