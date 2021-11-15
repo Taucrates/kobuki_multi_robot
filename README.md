@@ -26,10 +26,6 @@ roslaunch kobuki_multi_robot base_station.launch map_name
 ```
 See available maps in [maps](https://github.com/esauortiz/kobuki_multi_robot/tree/master/maps) folder.
 
-By default srvlab map is used:
-
-![](https://github.com/esauortiz/kobuki_multi_robot/blob/master/documentation/pictures/launch_base_station.png|width=100px)
-
 ### Launch kobuki and its sensor (on kobuki)
 Launch kobuki and its sensor.
 
@@ -92,6 +88,17 @@ Launch [navigation stack](http://wiki.ros.org/navigation) for each kobuki in sim
 ```bash
 roslaunch kobuki_multi_robot simulated_mission.launch mission_label
 ```
+
+### Mission example
+This package provides a default mission and a file with global goals. Running simulation launch files with ```mission_label = default``` and ```map_name = srvlab``` will set up default mission. In order to trigger global goals publications run: 
+
+```bash 
+rostopic pub /update_global_goals std_msgs/Int8 "data: 1"
+```
+
+The execution of the mission should look like the following representation, although the trajectories may vary.
+
+![](https://github.com/esauortiz/kobuki_multi_robot/blob/master/documentation/pictures/mission_progress.gif)
 
 ------------------------------------------------------------
 ## Some usage considerations
