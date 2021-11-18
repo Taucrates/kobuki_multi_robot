@@ -9,17 +9,18 @@ Instrucciones a seguir una vez se tiene instalado ROS Melodic / 18.04 LTS Ubuntu
     2) Entrar en el repositorio que se acaba de bajar y pasarlo a la rama "melodic": git checkout melodic
     3) Descargar los siguientes paquetes dentro del workspace:
 
-        sudo apt-get install ros_melodic_kobuki_core
-        sudo apt-get install ros_melodic_kobuki_msgs
-        sudo apt-get install ros_melodic_yocs_controllers
-        sudo apt-get install ros_melodic_ecl_streams
+        sudo apt-get install ros-melodic-kobuki-core
+        sudo apt-get install ros-melodic-kobuki-msgs
+        sudo apt-get install ros-melodic-yocs_controllers
+        sudo apt-get install ros-melodic-ecl_streams
 
     4) Compilar todos los paquestes descargados ejecutando catkin_make dentro del workspace
 
     ------------En este punto ya funcionaría con el robot real------------
 
-    5) Descargar el repositorio "kobuki_dsktop" de https://github.com/yujinrobot/kobuki_desktop
-    6) Ejecutar el comando: sudo apt-get install pyqt5-dev-tools
+    5) Descargar el repositorio "kobuki_desktop" de https://github.com/yujinrobot/kobuki_desktop
+    5b) Instalar gazebo: sudo apt-get install ros-melodic-gazebo-ros y ros-melodic-gazebo-ros (si se ha installado la versión desktop de ros melodic)
+	6) Ejecutar el comando: sudo apt-get install pyqt5-dev-tools
     7) Compilar de nuevo: catkin_make
 
     ------------En este punto debería funcionar también con el simulador Gazebo------------
@@ -28,9 +29,12 @@ Instrucciones a seguir una vez se tiene instalado ROS Melodic / 18.04 LTS Ubuntu
 
     8) En el .bashrc conviene añadir las líneas:
     source path_al_workspace/devel/setup.bash
-    export ROS_MASTER_URI=http://127.0.0.1:11311
-    export ROS_IP=127.0.0.1
-
+    export ROS_IP=192.168.0.14N # depende del kobuki o base station
+    export ROS_MASTER_URI=http://192.168.0.140:11311 # base station IP
+	export KOBUKI_NAME="kobuki_X" # depende del kobuki
+	export KOBUKI_ID=N # depende del kobuki
+	export SENSOR_ATTACHED= # hokuyo04LX, hokuyo20LX, hokuyo30LX, realsense o rplidar
+	
 Instrucciones adicionales
 
 	1) Activar conexión ssh https://linuxize.com/post/how-to-enable-ssh-on-ubuntu-18-04/
@@ -49,20 +53,23 @@ Instrucciones adicionales
 		sudo apt-get install ros-melodic-gmapping
 	9) Navagation stack
 		sudo apt-get install ros-melodic-navigation
-	10) Depth-to-scan 
+	10) Depth-to-scan (realsense)
 		sudo apt-get install ros-melodic-depthimage-to-laserscan
 		rosrun depthimage_to_laserscan depthimage_to_laserscan image:=/camera/depth/image_rect_raw camera_info:/camera/depth/camera_info
+	11) URG node (hokuyos)
+		sudo apt install ros-melodic-urg-node
+
 
 - Para el hokuyo 04LX
 	+ sudo adduser <YOUR_USERNAME> dialout
-	+ od /dev/ttyACM0
-	+ sudo apt install ros-melodic-urg-node
-	+ rosrun urg_node urg_node
 
 - Para el hokuyo 20LX
 	+ La dirección por defecto del hokuyo es 192.168.0.10
 	+ Configurar puerto ethernet (p.e. como 192.168.0.20/25)
 	+ rosrun urg_node urg_node _ip_address:=192.168.0.10
+
+- Para el hokuyo 30LX
+	+ sudo adduser <YOUR_USERNAME> dialout
 
 - Para el RPLIDAR
 	+ Descargar repositorio https//github.com/Slamtec/rplidar_ros
