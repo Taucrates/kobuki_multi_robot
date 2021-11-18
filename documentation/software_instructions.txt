@@ -80,6 +80,3 @@ Instrucciones adicionales
 
 - En BIOS
 	11) Opcion Advanced - Boot - Boot configuration - Suppress Alert Messages At Boot >> Desactivada
-
-- Despues de configurar IP estatica ver
-	12) ssh-keyscan -H 192.168.1.162 >> ~/.ssh/known_hosts
