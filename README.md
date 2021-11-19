@@ -34,7 +34,7 @@ roslaunch kobuki_multi_robot kobuki.launch robot_name sensor
 ```
 * Kobuki name is specified with ```robot_name``` parameter and can take the following values: ```kobuki_a```, ```kobuki_b```, ```kobuki_c```, ```kobuki_d``` and ```kobuki_e```.
 
-* Sensor parameter specifies the ```sensor``` placed on the kobuki and can take the following values: ```realsense```, ```hokuyo04LX```, ```hokuyo20LX``` and ```rplidar```.
+* Sensor parameter specifies the ```sensor``` placed on the kobuki and can take the following values: ```realsense```, ```hokuyo04LX```, ```hokuyo20LX```, ```hokuyo30LX``` and ```rplidar```.
 
 This roslaunch file could be also run with the next .sh file placed in [start_and_nav](https://github.com/esauortiz/kobuki_multi_robot/tree/master/start_and_nav) folder.
 
