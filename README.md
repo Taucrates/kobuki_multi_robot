@@ -22,9 +22,9 @@ catkin_make
 Launch kobuki description, rviz and goal master publisher. Goal master publications are triggered by ```rostopic pub /update_global_goals std_msgs/Int8 "data: 1"``` (see README file in [src](https://github.com/esauortiz/kobuki_multi_robot/tree/master/src) folder).
 
 ```bash
-roslaunch kobuki_multi_robot base_station.launch map_name
+roslaunch kobuki_multi_robot base_station.launch map_name global_goals_file_name
 ```
-See available maps in [maps](https://github.com/esauortiz/kobuki_multi_robot/tree/master/maps) folder.
+See available maps in [maps](https://github.com/esauortiz/kobuki_multi_robot/tree/master/maps) folder and see available global goals files in [global goals](https://github.com/esauortiz/kobuki_multi_robot/tree/master/param/global_goals) folder.
 
 ### Launch kobuki and its sensor (on kobuki)
 Launch kobuki and its sensor.
@@ -62,7 +62,7 @@ This roslaunch file could be also run with the next .sh file placed in [start_an
 ./kobuki_navigation.sh --mission mission_label
 ```
 
-Each kobuki has environmental variables defined in the .bashrc file in order to complete ```robot_name``` and ```sensor``` arguments. The mission (option -m|--mission) has to be specified in order to provide an initial pose for each kobuki.
+Each kobuki has environmental variables defined in the .bashrc file in order to complete ```robot_name``` and ```sensor``` arguments. The mission (option -m|--mission) has to be specified in order to provide an initial pose for each kobuki, see available missions in [missions](https://github.com/esauortiz/kobuki_multi_robot/tree/master/param/missions) folder.
 
 ------------------------------------------------------------
 ## Usage in simulation
@@ -71,9 +71,9 @@ Each kobuki has environmental variables defined in the .bashrc file in order to 
 Launch kobuki description, rviz and goal master publisher. Goal master publications are triggered by ```rostopic pub /update_global_goals std_msgs/Int8 "data: 1"``` (see README file in [src](https://github.com/esauortiz/kobuki_multi_robot/tree/master/src) folder).
 
 ```bash
-roslaunch kobuki_multi_robot base_station.launch map_name
+roslaunch kobuki_multi_robot base_station.launch map_name global_goals_file_name
 ```
-See available maps in [maps](https://github.com/esauortiz/kobuki_multi_robot/tree/master/maps) folder.
+See available maps in [maps](https://github.com/esauortiz/kobuki_multi_robot/tree/master/maps) folder and see available global goals files in [global goals](https://github.com/esauortiz/kobuki_multi_robot/tree/master/param/global_goals) folder.
 
 ### Launch gazebo with environment, kobuki and its sensor (on base station)
 Launch similation environment. The number of kobukis and their name have to be specified in ```simulated_playground.launch``` file.
@@ -89,6 +89,8 @@ Launch [navigation stack](http://wiki.ros.org/navigation) for each kobuki in sim
 roslaunch kobuki_multi_robot simulated_mission.launch mission_label
 ```
 
+See available missions in [missions](https://github.com/esauortiz/kobuki_multi_robot/tree/master/param/missions) folder.
+
 ### Mission example
 This package provides a default mission and a file with global goals. Running simulation launch files with ```mission_label:=default``` and ```map_name:=srvlab``` will set up default mission. In order to trigger global goals publications run: 
 
@@ -98,7 +100,17 @@ rostopic pub /update_global_goals std_msgs/Int8 "data: 1"
 
 The execution of the mission should look like the following representation, although the trajectories may vary.
 
-![](https://github.com/esauortiz/kobuki_multi_robot/blob/master/documentation/pictures/mission_progress.gif)
+![](https://github.com/esauortiz/kobuki_multi_robot/blob/master/documentation/pictures/mission_default.gif)
+
+Changing arguments to  ```global_goals_file_name:=willowgarage```, ```mission_label:=willowgarage``` and ```map_name:=willowgarage``` will set up willowgarage mission. In order to trigger global goals publications run: 
+
+```bash 
+rostopic pub /update_global_goals std_msgs/Int8 "data: 1"
+```
+
+The execution of the mission should look like the following representation, although the trajectories may vary. Notice that hokuyo range has been increased to improve kobuki's pose estimation.
+
+![](https://github.com/esauortiz/kobuki_multi_robot/blob/master/documentation/pictures/mission_willowgarage.gif)
 
 ------------------------------------------------------------
 ## Some usage considerations
