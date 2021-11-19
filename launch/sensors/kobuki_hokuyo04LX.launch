@@ -3,7 +3,7 @@
  -->
 <launch>  
   <arg name="robot_name" default="kobuki"/>
-  <arg name="serial_port" default="/dev/hokuyo04"/>
+  <arg name="serial_port" default="/dev/hokuyo04LX"/>
 
   <group ns="$(arg robot_name)">
     <!-- Set TFs required to run Gmapping (uncomment if joint_state_publisher is not launched)
