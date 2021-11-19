@@ -44,10 +44,8 @@ Instrucciones adicionales
 
 	5) Instalar htop
 
-	6) Adicionalmente se proveen de librerias de real-sense
+	6-7) Adicionalmente se proveen de librerias de real-sense
 		https://github.com/IntelRealSense/realsense-ros
-	7) Copiar .rules en /etc/udev/rules.d/ si ROS no detecta la camara por USB
-		https://github.com/IntelRealSense/librealsense/blob/master/config/99-realsense-libusb.rules
 
 	8) Gmapping
 		sudo apt-get install ros-melodic-gmapping
@@ -59,9 +57,13 @@ Instrucciones adicionales
 	11) URG node (hokuyos)
 		sudo apt install ros-melodic-urg-node
 
+- Para la realsense
+	+ sudo adduser <YOUR_USERNAME> dialout
+	+ copy realsense.rules to /etc/udev/rules.d
 
 - Para el hokuyo 04LX
 	+ sudo adduser <YOUR_USERNAME> dialout
+	+ copy hokuyo04LX.rules to /etc/udev/rules.d
 
 - Para el hokuyo 20LX
 	+ La dirección por defecto del hokuyo es 192.168.0.10
@@ -70,10 +72,12 @@ Instrucciones adicionales
 
 - Para el hokuyo 30LX
 	+ sudo adduser <YOUR_USERNAME> dialout
+	+ copy hokuyo30LX.rules to /etc/udev/rules.d
 
 - Para el RPLIDAR
 	+ Descargar repositorio https//github.com/Slamtec/rplidar_ros
 	+ sudo adduser <YOUR_USERNAME> dialout
+	+ copy rplidar.rules to /etc/udev/rules.d
 	+ sudo chmod 666 /dev/ttyUSB0
 	+ comprobar ls -al /dev/ttyUSB0
 	+ launch rplidar_s1.launch
