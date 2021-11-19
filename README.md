@@ -79,8 +79,10 @@ See available maps in [maps](https://github.com/esauortiz/kobuki_multi_robot/tre
 Launch similation environment. The number of kobukis and their name have to be specified in ```simulated_playground.launch``` file.
 
 ```bash
-roslaunch kobuki_multi_robot simulated_playground.launch
+roslaunch kobuki_multi_robot simulated_playground.launch world_label
 ```
+
+See available worlds in [worlds](https://github.com/esauortiz/kobuki_multi_robot/tree/master/simulation/environment/worlds) folder.
 
 ### Launch navigation stack for kobukis in gazebo (on base station)
 Launch [navigation stack](http://wiki.ros.org/navigation) for each kobuki in similation. Additionally, a mission has to be specified in order to place kobukis in simulation. The number of kobukis, their name and their ID have to be specified in ```simulated_mission.launch``` file.
@@ -102,7 +104,7 @@ The execution of the mission should look like the following representation, alth
 
 ![](https://github.com/esauortiz/kobuki_multi_robot/blob/master/documentation/pictures/mission_default.gif)
 
-Changing arguments to  ```global_goals_file_name:=willowgarage```, ```mission_label:=willowgarage``` and ```map_name:=willowgarage``` will set up willowgarage mission. In order to trigger global goals publications run: 
+Changing arguments to ```map_name:=willowgarage```, ```global_goals_file_name:=willowgarage.txt```, ```world_label:=willowgarage``` and ```mission_label:=willowgarage``` will set up willowgarage mission. In order to trigger global goals publications run:
 
 ```bash 
 rostopic pub /update_global_goals std_msgs/Int8 "data: 1"
