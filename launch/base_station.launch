@@ -5,7 +5,7 @@
   <arg name="rviz_file" default="multi_robot_navigation"/>
   <arg name="map_name" default="srvlab"/>
   <arg name="map_file" default="$(find kobuki_multi_robot)/maps/$(arg map_name).yaml"/>
-  <arg name="global_goals_file_name" default="global_goals.txt"/>
+  <arg name="global_goals_file_name" default="default.txt"/>
   
   <!-- World to map TF -->
   <!-- subterraneo args="1.95 22.85 0.0 -3.10159265359 0.0 0.0 /world /map 1"-->
