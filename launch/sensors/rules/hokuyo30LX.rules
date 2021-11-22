@@ -1,0 +1,3 @@
+# set the udev rule , make the device_port be fixed by hokuyo30LX
+#
+KERNEL=="ttyACM*", ATTRS{idVendor}=="1d6b", ATTRS{idProduct}=="0002", SYMLINK+="hokuyo30LX"
