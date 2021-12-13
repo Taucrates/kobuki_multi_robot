@@ -6,10 +6,6 @@
   <arg name="serial_port" default="/dev/hokuyo30LX"/>
 
   <group ns="$(arg robot_name)">
-    <!-- Set TFs required to run Gmapping (uncomment if joint_state_publisher is not launched)
-    <node pkg="tf" type="static_transform_publisher" name="basefp_to_baselink" args="0.0 0.0 0.0 0.0 0.0 0.0 $(arg robot_name)/base_footprint $(arg robot_name)/base_link 100"/>
-    <node pkg="tf" type="static_transform_publisher" name="basefp_to_scan" args="0.145 0.0 0.0 0.0 0.0 0.0 $(arg robot_name)/base_link $(arg robot_name)/base_scan 100"/>
-    -->
     <!-- Launch hokuyo laser -->
     <node pkg="urg_node" type="urg_node" name="urg_node">
       <param name="serial_port"      value="$(arg serial_port)"/>  
