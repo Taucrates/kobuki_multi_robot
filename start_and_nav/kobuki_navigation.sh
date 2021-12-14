@@ -12,10 +12,9 @@ case "$1" in
         exit 0
         ;;
     -m|--mission)
-        roslaunch kobuki_multi_robot kobuki_navigation.launch kobuki_id:=$KOBUKI_ID robot_name:=$KOBUKI_NAME mission:=$2
+        roslaunch kobuki_multi_robot kobuki_navigation.launch kobuki_id:=$KOBUKI_ID robot_name:=$KOBUKI_NAME mission_label:=$2
         exit 0
         ;;
     *)
       break
       ;;
-esac
