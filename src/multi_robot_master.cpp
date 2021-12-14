@@ -25,8 +25,7 @@ void updateGlobalGoalsCallback(const std_msgs::Int8::ConstPtr & update_global_go
 
 // Auxiliar methods
 void getGlobalGoals(std::vector<std::vector<float>>* global_goals, const std::string& global_goals_path_file);
-void publishGlobalGoal(const std::vector<float>& global_goal_vect, ros::Publisher* global_goal_pub);
-
+void publishGlobalGoal(const std::vector<float>& global_goal_vect, ros::Publisher* global_goal_pub, tf2_ros::Buffer* tf_buffer);
 
 int main(int argc, char **argv)
 {
@@ -49,6 +48,9 @@ int main(int argc, char **argv)
   std::string global_goals_path_file;
   nh.getParam("/multi_robot_master/global_goals_path_file", global_goals_path_file);
 
+  // TF (map to world)
+  tf2_ros::Buffer tf_buffer;
+
   while (ros::ok())
   {
 
@@ -57,7 +59,7 @@ int main(int argc, char **argv)
 
         // publish global goals
         for(int i = 0; i < global_goals.size(); i++){
-            publishGlobalGoal(global_goals[i], &global_goal_pub);
+            publishGlobalGoal(global_goals[i], &global_goal_pub, &tf_buffer);
         }
 
         ROS_INFO("Global goals have been published");
@@ -111,7 +113,11 @@ void getGlobalGoals(std::vector<std::vector<float>>* global_goals, const std::st
 publishGlobalGoal method
 Publishes a global goal
 *******************************************************************/
-void publishGlobalGoal(const std::vector<float>& global_goal_vect, ros::Publisher* global_goal_pub){
+void publishGlobalGoal(const std::vector<float>& global_goal_vect, ros::Publisher* global_goal_pub, tf2_ros::Buffer* tf_buffer){
+
+    // SCDs
+    std::string source_frame = "map";
+    //std::string target_frame = "map";
 
     // msg to be published
     kobuki_multi_robot::global_goal global_goal;
@@ -119,7 +125,7 @@ void publishGlobalGoal(const std::vector<float>& global_goal_vect, ros::Publishe
     global_goal.id = global_goal_vect[0];
     //global_goal.pose_stamped.header.seq = ros::Time::now();
     global_goal.pose_stamped.header.stamp = ros::Time::now();
-    global_goal.pose_stamped.header.frame_id = "map";    // global goal read from file is referenced to map frame 
+    global_goal.pose_stamped.header.frame_id = source_frame;    // global goal read from file is referenced to map frame 
     global_goal.pose_stamped.pose.position.x = global_goal_vect[1];
     global_goal.pose_stamped.pose.position.y = global_goal_vect[2];
     global_goal.pose_stamped.pose.position.z = global_goal_vect[3];
@@ -130,13 +136,14 @@ void publishGlobalGoal(const std::vector<float>& global_goal_vect, ros::Publishe
     quaternion = quaternion.normalize();
     global_goal.pose_stamped.pose.orientation = tf2::toMsg(quaternion);
 
-    /* from world to map // global goals file is assumed to be referenced to the world frame
-    tf2_ros::Buffer tf_buffer;
-    tf2_ros::TransformListener tf2_listener(tf_buffer);
+    // apply TF 
+    // TF is commented because we assume that global goals are referenced to map frame
+    // otherwise, uncomment this lines to apply TF
+    /*
     geometry_msgs::TransformStamped world_to_map;
-    world_to_map = tf_buffer.lookupTransform("map", "world", ros::Time(0), ros::Duration(1.0) ); // target: map, source: world
+    world_to_map = tf_buffer.lookupTransform(source_frame, target_frame, ros::Time(0), ros::Duration(1.0) ); // target: map, source: world
     tf2::doTransform(global_goal.pose_stamped, global_goal.pose_stamped, world_to_map); 
     */
-    // pub
+   
     global_goal_pub->publish(global_goal);
 }
