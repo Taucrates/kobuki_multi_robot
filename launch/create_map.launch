@@ -1,0 +1,22 @@
+<!--
+    Create map launcher. 
+    Launches:
+        - rviz to monitor the map
+        - gmapping to create the aforementioned map.
+        - velocity smoother to 
+ -->
+<launch>
+  <arg name="rviz_file" default="multi_robot_navigation"/>
+  <arg name="robot_name" default="kobuki"/>
+  
+  <!-- rviz w/ configuration-->    
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kobuki_multi_robot)/rviz/$(arg rviz_file).rviz" output="log"/>
+
+  <!-- Gmapping (if a map has not been created yet) -->  
+  <node pkg="gmapping" type="slam_gmapping" name="gmapping_thing" output="screen" >
+    <remap from="scan" to="$(arg robot_name)/scan" />
+    <param name="odom_frame" value="$(arg robot_name)/odom" />
+    <param name="base_frame" value="$(arg robot_name)/base_link" />
+  </node>
+
+</launch>
