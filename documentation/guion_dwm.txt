@@ -1,0 +1,94 @@
+﻿Medidas de autocalibracion
+
+1. Ejecutar el script para tomar medidas de autocalibracion
+	+ roscd dwm1001_drivers
+	+ python scripts/autocalibration_sample_uart.py <n_samples> <nodes_cfg_label> <initiator_enabler> <target_dwm_module>
+		- n_samples: numero de ranges entre target_dwm_module y resto de anchors
+		- nodes_cfg_label: la distribucion de los anchors y sus redes
+		- initiator_enabler: si despues de la medida de autocalibracion configuramos el modulo como anchor e initiator
+		- target_dwm_module: el modulo desde el cual tomamos medidas
+
+2. Resolver la autocalibracion en base a las medidas tomadas
+	+ roscd dwm1001_drivers/dwm_ble_cfg
+	+ python scripts/autocalibration_solver.py <nodes_cfg_label> <n_samples>
+
+Guía de experimentos con UWB
+
+1. Situar los anchors en el espacio
+	- Tomar medidas reales con el telémetro láser
+	- Modificar/crear el archivo que describe la distribución de los nodos en /dwm1001_drivers/params/nodes_cfg/<nodes_cfg_label>.yaml. No es estrictamente necesario definir la posición de los anchors correctamente durante la realización del experimento, pueden definirse durante el tramiento de datos a partir de las grabaciones de los experimentos.
+
+2. Poner en marcha los drivers del kobuki y su sensor
+
+	- Conectarse por ssh a la nuc del kobuki (mirar ficheros sh para cada kobuki)
+		+ ./<POKEMON>_login.sh
+		+ contraseña para todos: 12345678
+	- Acceder al paquete kobuki_multi_robot
+		+ roscd kobuki_multi_robot
+			- sincronizar repositorio si es necesario (git pull)
+	- Acceder a la carpeta start_and_nav
+		+ roscd kobuki_multi_robot/start_and_nav
+	- Poner en marcha drivers y sensor (en kobuki)
+		+ ./kobuki_start.sh
+
+3. Crear un mapa del entorno
+
+	- Lanzar rviz y gmapping (visualizar y hacer un mapa) (en base station)
+		+ roslaunch kobuki_multi_robot create_map.launch <robot_name>
+
+	- Lanzar los nodos para controlar el kobuki con el teclado 
+		+ roslaunch kobuki_multi_robot velocity_smoother.launch <robot_name> (en kobuki o en base station)
+		+ roslaunch kobuki_multi_robot keyop.launch <robot_name> (en base station)
+
+	- Guardar el mapa creado
+		+ roscd dwm1001_drivers/maps/
+		+ rosrun map_server map_saver -f <nombre_del_mapa>
+
+	- Cerrar nodos rviz, gmapping, velocity_smoother y keyop
+
+4. Poner en marcha el sistema de localizacion con UWB
+	- Poner en marcha drivers ros de los tags (uno para cada tag): (en la máquina donde estén conectadas por usb)
+		+ roslaunch dwm1001_drivers dwm1001.launch <nodes_cfg_label> <tag_id>
+	- Poner en marcha el nodo de localización (opcional)
+		+ roslaunch dwm1001_drivers localization.launch <nodes_cfg_label> <using_ekf>
+
+5. Hacer un recorrido con el kobuki
+
+	- Definir la TF entre world (sistema de coordenadas de los anchors) y map (sistema de coordenadas del kobuki)
+		+ ir al launch dwm1001_drivers/launch/nodes_viz.launch y modificar la TF ‘world_to_map’
+
+	- Lanzar visualización del recorrido
+		+ roslaunch dwm1001_drivers nodes_viz.launch <map_name>
+
+	- Lanzamos nodos para tener una referencia de la trayectoria (ground truth pose)
+		- Poner en marcha el amcl (en kobuki)
+				+ roscd kobuki_multi_robot
+				+ Primero modificar la posicion inicial del kobuki en kobuki_multi_robot/param/missions/<mission_label>/<robot_name>.yaml 
+				+ roslaunch kobuki_multi_robot amcl.launch <robot_name> <mission_label>
+		- Optitrack
+			+ Encender las camaras (enchufes)
+			+ Encender el PC (windows 8, contraseñ: srvpass)
+			+ Abrir motive, seleccionar proyecto de la carpeta Documentos/kobuki
+			+ Abrir el layout capture
+			+ roslaunch dwm1001_drivers vrpn_client.launch
+				* Corregir la TF entre /optitrack y /world si es necesario
+
+	- Lanzar los nodos para controlar el kobuki con el teclado 
+		+ roslaunch kobuki_multi_robot velocity_smoother.launch <robot_name> (en kobuki)
+		+ roslaunch kobuki_multi_robot keyop.launch <robot_name> (en base station)
+
+6. Grabacion del experimento
+	- cd <carpeta_donde_iran_los_bags>
+	- rosbag record -a -O <file_name>
+
+Procesamiento de datos
+	A partir del nodo de localizacion dwm1001_drivers/launch/localization.launch crear txts con referencia (amcl u Optitrack) y fichero de rangos
+
+1. Modificar el archivo que describe la distribución de los nodos en /dwm1001_drivers/params/nodes_cfg/<nodes_cfg_label>.yaml, si no se ha hecho anteriormente durante el experimento.
+
+2. Filtrar el bag grabado si es necesario (ver http://wiki.ros.org/rosbag/Commandline)
+	- rosbag filter grabacion_original.bag grabacion_filtrada.bag "topic not in <lista de topicos>"
+
+3. Reproducir la grabación filtrada del experimento y poner en marcha el nodo de localizacion
+	+ roslaunch dwm1001_drivers localization_sim_time.launch <nodes_cfg_label> <duration>
+	
