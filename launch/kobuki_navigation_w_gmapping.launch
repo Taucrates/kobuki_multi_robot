@@ -10,6 +10,7 @@
 	<!-- Gmapping (if a map has not been created yet) ([!] COMMNET AMCL launch on kobuki_navigation.launch or run only velocity_smoother.launch)--> 
  	<group ns="$(arg robot_name)">
 		<node pkg="gmapping" type="slam_gmapping" name="gmapping" output="screen" >
+			<param name="map_frame" value="$(arg robot_name)/map">
 		</node>
 	</group>	
 	
