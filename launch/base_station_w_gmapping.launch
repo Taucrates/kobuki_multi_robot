@@ -1,0 +1,21 @@
+<!--
+  Test launcher
+ -->
+<launch>
+  <arg name="robot_name" default="kobuki"/>
+  <arg name="rviz_file" default="multi_robot_navigation"/>
+  <arg name="global_goals_file_name" default="default.txt"/>
+  
+  <!-- rviz w/ configuration-->    
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kobuki_multi_robot)/rviz/$(arg rviz_file).rviz" output="log"/>
+
+  <!-- Global goals publisher. [!] If launched then UNCOMMNET goal listener launch on kobuki_navigation.launch -->
+	<include file="$(find kobuki_multi_robot)/launch/multi_robot_master.launch">
+		<arg name="global_goals_path_file" value="$(find kobuki_multi_robot)/param/global_goals/$(arg global_goals_file_name)"/>
+	</include>
+
+  <group ns="$(arg robot_name)">
+		<node pkg="gmapping" type="slam_gmapping" name="gmapping" output="screen"/>
+	</group>	
+
+</launch>
