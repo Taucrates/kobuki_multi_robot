@@ -19,10 +19,15 @@
 
       <param name="controller_frequency" value="10.0" />
       <param name="global_costmap/robot_base_frame" value="$(arg robot_name)/base_footprint"/>
+      <!-- Descomentar esta linea se se utiliza navigation stack con gmapping en lugar de amcl
+        <param name="global_costmap/globa_frame" value="$(arg robot_name)/map"/>-->
       <param name="local_costmap/robot_base_frame" value="$(arg robot_name)/base_footprint"/>
       <param name="local_costmap/global_frame" value="$(arg robot_name)/odom"/>   
 
-      <remap from="map" to="/$(arg robot_name)/map"/>
+      <!-- Descomentar esta linea se se utiliza navigation stack con gmapping en lugar de amcl
+        (Comprobar si es necesario, es posible que no haga falta añadir esta linea)
+        <remap from="map" to="$(arg robot_name)/map"/>-->
+      <remap from="map" to="/map"/>
       <remap from="cmd_vel" to="mobile_base/commands/raw_velocity"/>
       <remap from="odom" to="odom"/>
       <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
