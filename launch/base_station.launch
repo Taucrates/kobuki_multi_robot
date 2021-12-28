@@ -24,13 +24,4 @@
 	<include file="$(find kobuki_multi_robot)/launch/multi_robot_master.launch">
 		<arg name="global_goals_path_file" value="$(find kobuki_multi_robot)/param/global_goals/$(arg global_goals_file_name)"/>
 	</include>
-  
-  <!-- Gmapping (if a map has not been created yet) ([!] COMMNET AMCL launch on kobuki_navigation.launch or run only velocity_smoother.launch)
-  <arg name="robot_name" default="kobuki"/>
-    <node pkg="gmapping" type="slam_gmapping" name="gmapping_thing" output="screen" >
-    <remap from="scan" to="$(arg robot_name)/scan" />
-    <param name="odom_frame" value="$(arg robot_name)/odom" />
-    <param name="base_frame" value="$(arg robot_name)/base_link" />
-  </node>
-  -->  
 </launch>
