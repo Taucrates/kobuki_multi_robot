@@ -1,0 +1,27 @@
+<!--
+  Test launcher
+ -->
+<launch>
+  <arg name="rviz_file" default="multi_robot_visualization"/>
+  <arg name="map_name" default="srvlab_small"/>
+  <arg name="map_file" default="$(find kobuki_multi_robot)/maps/$(arg map_name).yaml"/>
+  <arg name="global_goals_file_name" default="default.txt"/>
+  
+  <!-- World to map TF -->
+  <!-- subterraneo args="1.95 22.85 0.0 -3.10159265359 0.0 0.0 /world /map 1"-->
+  <!-- srvlab args="1.0 3.0 0.0 0.0 0.0 0.0 /world /map 100"-->
+  <!--<node pkg="tf" type="static_transform_publisher" name="world_to_map" args="0.0 -2.4 0.0 0.0 0.0 0.0 /world /map 1"/>-->
+
+  <!-- rviz w/ configuration-->    
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kobuki_multi_robot)/rviz/$(arg rviz_file).rviz" output="log"/>
+  
+  <!-- map publisher (if a map has already been created) ([!] UNCOMMENT AMCL launch on kobuki_navigation.launch)-->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
+    <param name="frame_id" value="map" />
+  </node>
+
+  <!-- Global goals publisher. [!] If launched then UNCOMMNET goal listener launch on kobuki_navigation.launch -->
+	<include file="$(find kobuki_multi_robot)/launch/multi_robot_master.launch">
+		<arg name="global_goals_path_file" value="$(find kobuki_multi_robot)/param/global_goals/$(arg global_goals_file_name)"/>
+	</include>
+</launch>

@@ -17,6 +17,10 @@
     <remap from="scan" to="$(arg robot_name)/scan" />
     <param name="odom_frame" value="$(arg robot_name)/odom" />
     <param name="base_frame" value="$(arg robot_name)/base_link" />
+    <param name="xmin" value="-2"/>
+    <param name="xmax" value="10"/>
+    <param name="ymin" value="-5"/>
+    <param name="ymax" value="5"/>
   </node>
 
 </launch>

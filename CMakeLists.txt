@@ -48,6 +48,9 @@ include_directories(
 add_executable(multi_robot_master src/multi_robot_master.cpp)
 target_link_libraries(multi_robot_master ${catkin_LIBRARIES})
 
+add_executable(multi_robot_master_v2 src/multi_robot_master_v2.cpp)
+target_link_libraries(multi_robot_master_v2 ${catkin_LIBRARIES})
+
 add_executable(multi_robot_slave src/multi_robot_slave.cpp)
 target_link_libraries(multi_robot_slave ${catkin_LIBRARIES})
 
@@ -56,4 +59,5 @@ target_link_libraries(model_state_setter ${catkin_LIBRARIES})
 
 # deps
 add_dependencies(multi_robot_master kobuki_multi_robot_generate_messages_cpp)
+add_dependencies(multi_robot_master_v2 kobuki_multi_robot_generate_messages_cpp)
 add_dependencies(multi_robot_slave kobuki_multi_robot_generate_messages_cpp)

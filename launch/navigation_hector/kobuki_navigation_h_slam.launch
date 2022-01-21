@@ -1,0 +1,81 @@
+<launch>
+	<!-- Arguments -->
+	<arg name="robot_name" default="kobuki"/>
+	<arg name="kobuki_id" default="0"/>
+	<arg name="mission_label" default="default"/>
+	<arg name="initial_pose_x" default="0"/>
+  	<arg name="initial_pose_y" default="0"/>
+  	<arg name="initial_pose_a" default="0"/>
+	
+
+	<!-- world to map TF 
+	<node pkg="tf" type="static_transform_publisher" name="world_to_$(arg robot_name)_map" args="$(arg initial_pose_x) $(arg initial_pose_y) 0.0 $(arg initial_pose_a) 0.0 0.0 /world /$(arg robot_name)/map 1">
+		<arg name="initial_pose_x" value="0"/>
+  		<arg name="initial_pose_y" default="0"/>
+  		<arg name="initial_pose_a" default="0"/>
+	</node> -->
+
+
+	<!--<node pkg="tf" type="static_transform_publisher" name="world_to_kobuki_a_map" args="0.0 0.0 0.0 0.0 0.0 0.0 /world /kobuki_a/map 1"/>
+	<node pkg="tf" type="static_transform_publisher" name="world_to_kobuki_b_map" args="0.0 -2.4 0.0 0.0 0.0 0.0 /world /kobuki_b/map 1"/>-->
+	<!-- Hector SLAM --> 
+ 	<group ns="$(arg robot_name)">
+		<node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" output="screen">
+
+			<!-- Frame names -->
+			<param name="map_frame" value="$(arg robot_name)/map" />
+			<param name="base_frame" value="$(arg robot_name)/base_footprint" />
+			<param name="odom_frame" value="$(arg robot_name)/odom" />
+
+			<!-- Tf use -->
+			<param name="use_tf_scan_transformation" value="true"/>
+			<param name="use_tf_pose_start_estimate" value="false"/>
+			<param name="pub_map_odom_transform" value="true"/>
+
+			<!-- Map size / start point -->
+			<param name="map_resolution" value="0.050"/>
+			<param name="map_size" value="512"/>
+			<param name="map_start_x" value="0.5"/>
+			<param name="map_start_y" value="0.5" />
+			<param name="map_multi_res_levels" value="2" />
+
+			<!-- Map update parameters -->
+			<param name="update_factor_free" value="0.1"/>
+			<param name="update_factor_occupied" value="0.9" />    
+			<param name="map_update_distance_thresh" value="0.4"/>
+			<param name="map_update_angle_thresh" value="0.06" />
+			<param name="laser_z_min_value" value = "-1.0" />
+			<param name="laser_z_max_value" value = "1.0" />
+
+			<!-- Advertising config --> 
+			<param name="advertise_map_service" value="true"/>
+
+			<param name="scan_subscriber_queue_size" value="5"/>
+			<param name="scan_topic" value="/$(arg robot_name)/scan"/>
+
+			<!-- Debug parameters -->
+			<!--
+			<param name="output_timing" value="false"/>
+			<param name="pub_drawings" value="true"/>
+			<param name="pub_debug_output" value="true"/>
+			-->
+			<param name="tf_map_scanmatch_transform_frame_name" value="scanmatcher_frame" />
+		</node>
+	</group>	
+	
+	<!-- Kobuki move_base-->
+	<include file="$(find kobuki_multi_robot)/launch/navigation_hector/move_base_hector_slam.launch" >
+		<arg name="robot_name" value="$(arg robot_name)"/>
+	</include>
+
+	<!-- Velocitiy smoother -->
+	<include file="$(find kobuki_multi_robot)/launch/velocity_smoother.launch">
+		<arg name="robot_name" value="$(arg robot_name)"/>
+	</include>
+
+	<!-- Global goal listener. [!] If launched then UNCOMMNET global goals publisher launch on kobuki_navigation.launch-->
+	<include file="$(find kobuki_multi_robot)/launch/multi_robot_slave.launch" >
+		<arg name="robot_name" value="$(arg robot_name)"/>
+		<arg name="kobuki_id" value="$(arg kobuki_id)"/>
+	</include>
+</launch>

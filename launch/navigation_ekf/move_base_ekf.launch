@@ -1,0 +1,57 @@
+<launch>
+  <!-- Arguments -->
+  <arg name="robot_name" default="kobuki"/>
+  
+  <!-- Move robot base -->
+  <group ns="$(arg robot_name)">
+
+    <!-- Robot Localization -->
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization">
+      <rosparam command="load" file="$(find kobuki_multi_robot)/config/robot_localization_$(arg robot_name).yaml" />
+    </node>
+
+    <!-- Move base -->
+    <arg name="move_forward_only" default="False"/>
+
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+      <!--<param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />-->
+
+      <rosparam file="$(find kobuki_multi_robot)/param/navigation_ekf/costmap_common_params/$(arg robot_name).yaml" command="load" ns="global_costmap" />
+      <rosparam file="$(find kobuki_multi_robot)/param/navigation_ekf/costmap_common_params/$(arg robot_name).yaml" command="load" ns="local_costmap" />
+
+      <rosparam file="$(find kobuki_multi_robot)/param/navigation_ekf/local_costmap_params.yaml" command="load" />
+      <rosparam file="$(find kobuki_multi_robot)/param/navigation_ekf/global_costmap_params.yaml" command="load" />
+
+      <rosparam file="$(find kobuki_multi_robot)/param/navigation_ekf/move_base_params.yaml" command="load" />
+      <!--<rosparam file="$(find kobuki_multi_robot)/param/navigation_ekf/dwa_local_planner_params.yaml" command="load" />-->
+
+      <param name="controller_frequency" value="10.0" />
+
+      <remap from="cmd_vel" to="mobile_base/commands/raw_velocity"/>
+
+      <!--<param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
+      
+      <param name="local_costmap/obstacle_layer/laser_scan/topic" value="/$(arg robot_name)/scan"/>
+      <param name="local_costmap/obstacle_layer/laser_scan/sensor_frame" value="$(arg robot_name)/base_scan"/>
+      <param name="global_costmap/obstacle_layer/laser_scan/topic" value="/$(arg robot_name)/scan"/>
+      <param name="global_costmap/obstacle_layer/laser_scan/sensor_frame" value="$(arg robot_name)/base_scan"/>
+      <param name="local_costmap/obstacle_layer/laser_scan/inf_is_valid" value="true"/>
+      <param name="global_costmap/obstacle_layer/laser_scan/inf_is_valid" value="true"/> -->
+
+      <param name="global_costmap/global_frame" value="$(arg robot_name)/odom"/>
+      <param name="global_costmap/robot_base_frame" value="$(arg robot_name)/base_footprint"/>
+      <param name="global_costmap/laser_scan_sensor/sensor_frame" value="$(arg robot_name)/base_scan"/>
+      <param name="global_costmap/laser_scan_sensor/topic" value="/$(arg robot_name)/scan"/>  
+
+      <param name="local_costmap/global_frame" value="$(arg robot_name)/odom"/>
+      <param name="local_costmap/robot_base_frame" value="$(arg robot_name)/base_footprint"/>
+      <param name="local_costmap/laser_scan_sensor/sensor_frame" value="$(arg robot_name)/base_scan"/>
+      <param name="local_costmap/laser_scan_sensor/topic" value="/$(arg robot_name)/scan"/> 
+      <param name="local_costmap/obstacle_layer/laser_scan_sensor/topic" value="$/(arg robot_name)/scan"/>
+      <param name="local_costmap/obstacle_layer/laser_scan/inf_is_valid" value="true"/>
+
+      <remap from="/$(arg robot_name)/odom" to="/$(arg robot_name)/odometry/filtered" />
+    </node>
+  </group>
+
+</launch>

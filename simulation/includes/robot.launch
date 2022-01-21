@@ -18,6 +18,8 @@
       <param name="publish_frequency" type="double" value="30.0"/>
       <param name="tf_prefix" value="$(arg robot_name)"/>
     </node>
-    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager"/>
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager">
+      <param name="use_imu_heading" value="true" />
+    </node>
   </group>
 </launch>
