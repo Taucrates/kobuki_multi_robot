@@ -124,23 +124,6 @@ void publishGlobalGoal(const std::vector<float>& global_goal_vect, ros::Publishe
     
     global_goal.id = global_goal_vect[0];
 
-    /*switch(global_goal.id){
-        case 1:
-            source_frame = "kobuki_a/map";
-        break;
-        case 2:
-            source_frame = "kobuki_b/map";
-        break;
-        case 3:
-            source_frame = "kobuki_c/map";
-        break;
-        case 4:
-            source_frame = "kobuki_d/map";
-        break;
-        case 5:
-            source_frame = "kobuki_e/map";
-        break;
-    }*/
     //global_goal.pose_stamped.header.seq = ros::Time::now();
     global_goal.pose_stamped.header.stamp = ros::Time::now();
     global_goal.pose_stamped.header.frame_id = source_frame;    // global goal read from file is referenced to map frame 
